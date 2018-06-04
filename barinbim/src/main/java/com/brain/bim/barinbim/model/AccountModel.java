@@ -2,30 +2,13 @@ package com.brain.bim.barinbim.model;
 
 import java.time.LocalDateTime;
 
-public class UserModel {
-  
+public class AccountModel {
   private Long id;
-  private AccountModel account;
-  private String userName;
-  private String hashPassword;
+  private String accountName;
   private int version;
   private int status;
   private LocalDateTime  created;
   private LocalDateTime  updated;
-
-  
-  public UserModel(){
-    
-  }
-  
-  public UserModel(Long id, String uname, String pass, int version){
-    this.id = id;
-    this.userName = uname;
-    this.hashPassword = pass;
-    this.version = version;
-    
-  }
-
   
   public Long getId() {
     return id;
@@ -35,34 +18,15 @@ public class UserModel {
   public void setId(Long id) {
     this.id = id;
   }
+
   
-  
-  public AccountModel getAccount() {
-    return account;
+  public String getAccountName() {
+    return accountName;
   }
 
   
-  public void setAccount(AccountModel account) {
-    this.account = account;
-  }
-
-  public String getUserName() {
-    return userName;
-  }
-
-  
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  
-  public String getHashPassword() {
-    return hashPassword;
-  }
-
-  
-  public void setHashPassword(String hashPassword) {
-    this.hashPassword = hashPassword;
+  public void setAccountName(String name) {
+    this.accountName = name;
   }
 
   
@@ -104,6 +68,5 @@ public class UserModel {
   
   public void setUpdated(LocalDateTime updated) {
     this.updated = updated;
-  }
-  
+  } 
 }
