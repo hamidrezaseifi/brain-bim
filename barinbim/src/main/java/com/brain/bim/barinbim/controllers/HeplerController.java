@@ -23,7 +23,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.thymeleaf.exceptions.TemplateInputException;
 
 import com.brain.bim.barinbim.exceptions.UiRestResponse;
-import com.brain.bim.barinbim.helper.UiMenuManager;
+import com.brain.bim.barinbim.helper.UiToolbarManager;
 
 /**
  * controller class to manage rest api for provide value list and menu list for gui...
@@ -39,7 +39,7 @@ public class HeplerController {
   private final Logger logger = LoggerFactory.getLogger(HeplerController.class);
 
   @Autowired
-  private UiMenuManager menuManager;
+  private UiToolbarManager menuManager;
 
   @ResponseBody
   @RequestMapping(value = "/layout/menulist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

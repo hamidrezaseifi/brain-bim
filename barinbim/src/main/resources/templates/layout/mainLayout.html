@@ -39,26 +39,12 @@
 			<nav class="navbar navbar-default" th:fragment="navbar">
 			  <div class="container-fluid">
 			    <div class="navbar-header">
-			      <a class="navbar-brand" href="/"><img class="logo" th:src="@{/images/logo.png}" /></a>
+			      <a class="navbar-brand" href="/"><img class="logo" th:src="@{/images/bim.png}" /></a>
 			    </div>
 			    
-			    <div class="navbar navbar-nav">
-					<md-menu-bar>
-					 <md-menu ng-repeat="menu in menulist" ng-if="menu.status == 1">
-					   <a href="{{menu.url}}" ng-click="((menu.childs.length > 0) && $mdOpenMenu())" >
-					     <span ng-if="menu.image != ''" class="{{menu.image}} menu-image"></span>&nbsp;<span class="menu-label">{{menu.label}}</span>
-					   </a>
-					   
-					   <md-menu-content>
-					   		<md-menu-item class="submenu" ng-repeat="submenu in menu.childs"   >
-						   		<a href="{{submenu.url}}">
-									<span ng-if="submenu.image != ''" class="{{submenu.image}} menu-image"></span>&nbsp;<span class="menu-label submenu">{{submenu.label}}</span>
-								</a>
-							</md-menu-item>
-					   </md-menu-content>
-					 </md-menu>
-					</md-menu-bar>			    
-			    </div>	    
+			    <ul class="navbar navbar-nav">
+			    	<li th:each="menu : ${topMenu}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}" ><a th:href="${menu.getUrl()}"><span th:class="${menu.getClass('menu-image')}"></span>&nbsp;<span class="menu-label" th:text="${menu.getLabel()}"></span></a></li>
+			    </ul>	    
        			    
 			    <div class="navbar-user-detail">
 			      <div class="user-detail dropdown"> 
@@ -86,7 +72,7 @@
 	            <md-button class="md-raised md-primary close-right-menu" ng-click="closeSideRight()">Schließen</md-button>
 	        </md-sidenav>
         </header>
-		<div th:fragment="breadcrumb" style="background-color: #eeeeee;">
+		<div th:fragment="breadcrumb" style="background-color: #eeeeee;" ng-if="false">
 			 <ul class="breadcrumb" >
 			     <li th:each="entry : ${breadCrumb}">
 			         <a th:href="${entry.getUrl()}" th:if="${entry.isLink()}" th:text="${entry.getLabel()}">Home</a>

@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/user")
-public class UserController{
+@RequestMapping(path = "/my")
+public class MyController{
 
   //private final Logger logger = LoggerFactory.getLogger(MainController.class);
   
-  @GetMapping("/changepassword")
+  @GetMapping("/dashboard")
   public String index(final Model model) {
     //logger.debug("test");
 
-    return "user/changepassword";
+    return "my/dashboard";
   }
   
   

@@ -498,4 +498,19 @@ textarea:disabled, input:disabled
 	margin: 5px;	
 }
 
+ul.navbar-nav {
+    list-style-type: none;
+    padding-top: 11px;
+}
 
+ul.navbar-nav>li {
+    margin-right: 10px;
+    
+}
+
+ul.navbar-nav>li a {
+    padding:3px;
+    padding-left:5px;
+    padding-right:5px;
+    
+}

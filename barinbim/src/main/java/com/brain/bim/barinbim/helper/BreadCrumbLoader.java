@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.brain.bim.barinbim.model.ui.BreadCrumb;
-import com.brain.bim.barinbim.model.ui.UiMenuItem;
+import com.brain.bim.barinbim.model.ui.UiToolbarItem;
 
 /**
  * a class to manage BreadCrumb items for each page
@@ -19,7 +19,7 @@ import com.brain.bim.barinbim.model.ui.UiMenuItem;
 public class BreadCrumbLoader {
 
   @Autowired
-  private UiMenuManager menuManager;
+  private UiToolbarManager menuManager;
 
   /**
    * this code create BreadCrumb list from the url string. the urls are in menu items and each url must have a identical menu item. if there
@@ -33,9 +33,9 @@ public class BreadCrumbLoader {
 
     final ArrayList<BreadCrumb> list = new ArrayList<>();
 
-    UiMenuItem home = menuManager.getMenuItemByUrl("/");
-    final UiMenuItem item = menuManager.getMenuItemByUrl(url);
-    UiMenuItem temp = item;
+    UiToolbarItem home = menuManager.getMenuItemByUrl("/");
+    final UiToolbarItem item = menuManager.getMenuItemByUrl(url);
+    UiToolbarItem temp = item;
 
     while (temp != null) {
       list.add(0, new BreadCrumb(temp.getLabel(), temp.getUrl(), temp.getId() == item.getId()));
