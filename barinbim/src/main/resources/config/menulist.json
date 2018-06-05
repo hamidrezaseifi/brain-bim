@@ -1,0 +1,6 @@
+[
+	{"id":1, "labelid":"menu.home","url":"/","image":"glyphicon glyphicon-home", "status": 1, "children":[]},
+	{"id":5, "labelid":"menu.mydashboard","url":"/site/dashboard","image":"glyphicon glyphicon-user", "status": 1,"children":[]},
+	{"id":10, "labelid":"menu.accounts","url":"/accounts/index","image":"glyphicon glyphicon-user", "status": 1,"children":[]},
+	{"id":20, "labelid":"menu.about","url":"/about","image":"glyphicon glyphicon-info-sign", "status": 1,"children":[]}
+]

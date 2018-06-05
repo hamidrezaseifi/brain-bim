@@ -1,10 +1,16 @@
-﻿<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" >
+﻿<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="mdmApp" >
     <head>
     
-    	
-		
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+		<script th:src="@{/js/index.js}"></script>
     </head>
     <body ng-controller="BodyController">
-        <h1>Accounts Update Page ...</h1>
+        <header th:replace="layout/mainLayout :: header" ></header>
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+
+        <h1>Accounts update Page ...</h1>
+
+
+        <footer th:replace="layout/mainLayout :: footer" ></footer>
     </body>
 </html>

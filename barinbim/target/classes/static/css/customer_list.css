@@ -1,0 +1,239 @@
+@charset "ISO-8859-1";
+
+table.customers-list
+{
+	width: calc(100vw - 100px);
+	margin-left: 50px;
+	border: 1px solid gray;
+	/* border-collapse:separate; */
+	border-spacing: 0px 5px;
+}
+
+table.customers-list thead tr th
+{
+	background-color: #dfdfdf;
+	color: #000071;
+	font-weight: bold;
+	font-size: 14px;
+	height: 30px;
+	border: 1px solid gray;
+	text-align: center;
+}
+
+table.customers-list thead tr th.address
+ , table.customers-list thead tr th.email , table.customers-list thead tr th.tel
+{
+	width: 24%;
+}
+
+table.customers-list thead tr th.action
+{
+	width: 40px;
+}
+
+table.customers-list tbody tr.sourcerow:not(.source) td.name
+{
+	padding-left: 40px;
+}
+
+.dialog-edit div.personal-detail, .dialog-edit div.address-detail, .dialog-edit div.tel-detail, .dialog-edit div.email-detail, .dialog-edit div.detail-list
+{
+	margin: 5px;
+	border: 1px solid gray;
+	
+}
+
+.dialog-edit div.detail-list, .dialog-edit div.personal-detail
+{
+	padding: 5px;
+	background-color: #e9e9e9;
+}
+
+.dialog-edit div.address-detail, .dialog-edit div.tel-detail, .dialog-edit div.email-detail
+{
+	margin-left: 30px;
+	
+}
+
+.customers-list div.general-detail, 
+.customers-list div.address-detail, 
+.customers-list div.tel-detail, 
+.customers-list div.email-detail
+{
+	padding: 5px 2px;
+}
+
+.customers-list div.address-detail, 
+.customers-list div.tel-detail, 
+.customers-list div.email-detail
+{
+	border-bottom: gray solid 1px !important;
+}
+
+.customers-list div.address-detail:last-of-type, 
+.customers-list div.tel-detail:last-of-type, 
+.customers-list div.email-detail:last-of-type
+{
+	border-bottom: none !important;
+}
+
+.customers-list td[title="'Adresse'"],
+.customers-list td[title="'Telefone'"],
+.customers-list td[title="'E-Mail'"]
+{
+	padding: 0 !important;
+}
+
+.customers-list td[title="'Adresse'"] div.address-detail,
+.customers-list td[title="'Telefone'"] div.tel-detail,
+.customers-list td[title="'E-Mail'"] div.email-detail
+{
+	padding: 5px !important;
+}
+
+.toolbar {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 40px;
+    padding: 4px;
+    background: #e1e1e1;
+}
+
+.toolbar-options md-radio-button
+{
+	float: left;
+	margin-bottom: 0 !important;	
+	margin-right: 10px !important;	
+}
+
+.toolbar-options:after
+{
+	clear: both;	
+}
+
+.top-toolbar
+{
+	padding: 5px;
+	padding-left: 50px;
+	font-size: 14px !important;
+	line-height: 15px !important;
+	margin-bottom: 15px;
+}
+
+.top-toolbar .md-button
+{
+	
+}
+
+md-toolbar md-input-container
+{
+	margin:0 !important;
+	margin-top: 18px !important;
+    margin-right: 5px !important;
+    max-width: 200px !important;
+}
+
+md-toolbar md-input-container md-select
+{
+    max-width: 200px !important;
+}
+
+.top-toolbar md-radio-group
+{
+	margin-top: 5px;
+	margin-right: 40px;
+}
+
+div.top-pagination
+{
+	margin: 10px 50px;
+}
+
+div[template-url="templates.pagination"]
+{
+	display: none;
+}
+
+ul.pagination
+{
+	margin-top: 0;
+	margin-bottom: 0;
+		
+}
+
+md-toolbar md-input-container label
+{
+	color: #ffffe3 !important;
+}
+
+.ng-table th.filter .input-filter
+{
+	
+}
+
+.dialog-edit .personal-detail label
+{
+	width: 90px;	
+}
+
+.dialog-edit .personal-detail div.prow
+{
+	padding-bottom: 10px;	
+}
+
+.dialog-edit .address-table
+{
+	width: 100%;
+	border-collapse: separate;
+    border-spacing: 5px;
+    padding-bottom: 10px;
+}
+
+.dialog-edit div.address-detail button.md-button.md-icon-button
+{
+	margin-top: -20px !important;
+}
+
+.dialog-edit div.tel-detail button.md-button.md-icon-button:not(.inline-botton), 
+.dialog-edit div.email-detail button.md-button.md-icon-button:not(.inline-botton)
+{
+	margin-top: 10px !important;
+}
+
+.dialog-edit div.email-detail button.md-button.md-icon-button.inline-botton
+{
+	margin: 0 !important;
+    padding: 0 !important;
+    height: 24px !important;
+    min-height: 24px !important;
+}
+
+.dialog-edit .tel-detail input.subscriberpart,
+.dialog-edit .email-detail input
+{
+	width: 210px !important;
+	margin: 5px !important;
+}
+
+md-select.invalid md-select-value
+{
+	border: red 1px solid;
+}
+
+div.data-preview
+{
+	float: left;
+	padding: 5px;
+	padding-right: 10px;	
+	margin-right: 5px;
+}
+
+div.data-preview:not(.no-border)
+{
+	border-right: 1px solid gray;
+}
+
+
+
