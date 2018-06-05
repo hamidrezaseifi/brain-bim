@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class AccountModel {
   private Long id;
   private String accountName;
+  private String comments;
   private int version;
   private int status;
   private LocalDateTime  created;
@@ -27,6 +28,16 @@ public class AccountModel {
   
   public void setAccountName(String name) {
     this.accountName = name;
+  }
+
+  
+  public String getComments() {
+    return comments;
+  }
+
+  
+  public void setComments(String comment) {
+    this.comments = comment;
   }
 
   

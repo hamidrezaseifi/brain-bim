@@ -13,9 +13,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.brain.bim.barinbim.dao.AccountsDao;
 import com.brain.bim.barinbim.dao.UsersDao;
 import com.brain.bim.barinbim.model.UserModel;
-import com.brain.bim.barinbim.model.UserQueryModel;
 
 
 
@@ -24,14 +24,16 @@ public class UsersDaoImpl implements UsersDao {
   
   private final Logger logger = LoggerFactory.getLogger(UsersDaoImpl.class);
 
-  private final JdbcTemplate               jdbcTemplate;
-  private final PlatformTransactionManager platformTransactionManager;
+  private final AccountsDao                 accountsDao;
+  private final JdbcTemplate                jdbcTemplate;
+  private final PlatformTransactionManager  platformTransactionManager;
 
 
   @Autowired
-  public UsersDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager) {
+  public UsersDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager, AccountsDao accountsDao) {
     this.jdbcTemplate = jdbcTemplate;
     this.platformTransactionManager = platformTransactionManager;
+    this.accountsDao = accountsDao;
   }
 
   @Override
@@ -65,37 +67,46 @@ public class UsersDaoImpl implements UsersDao {
   }
   
   @Override
-  public List<UserModel> searchUsers(UserQueryModel queryModel) {
+  public List<UserModel> listUsers(int maxCount) {
     // TODO Auto-generated method stub
-    return queryForUserss(queryModel);
+    return queryForUsers(maxCount);
   }
   
 
-  private List<UserModel> queryForUserss(final UserQueryModel queryModel) {
+  private List<UserModel> queryForUsers(final int maxCount) {
     
-    final String sql = " select id, username, hash_password, version, status, created, updated from tblusers where (? is null or username = ?) limit ? ";
+    final String sql = " select id, account, username, hash_password, version, status, created, updated from tblusers limit ? ";
     
-    List<UserModel> list = jdbcTemplate.query(sql, new Object[]{queryModel.getUserName(),queryModel.getUserName(),queryModel.getMaxRecords()}, new RowMapper<UserModel>(){
+    List<UserModel> list = jdbcTemplate.query(sql, new Object[]{maxCount}, new RowMapper<UserModel>(){
 
       @Override
       public UserModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-        UserModel umodel = new UserModel();
 
-        umodel.setId(rs.getLong("id"));
-        umodel.setUserName(rs.getString("username"));
-        umodel.setHashPassword(rs.getString("hash_password"));
-        umodel.setVersion(rs.getInt("version"));
-        umodel.setStatus(rs.getInt("status"));
-
-        umodel.setCreated(rs.getTimestamp("created").toLocalDateTime());
-        umodel.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
-
-        return umodel;
+        return createUserFromResultSet(rs);
       }
       
     });
     
     return list;
+    
+  }
+
+  private UserModel createUserFromResultSet(ResultSet rs) throws SQLException {
+    
+    UserModel umodel = new UserModel();
+
+    umodel.setId(rs.getLong("id"));
+    umodel.setAccount(accountsDao.readAccount(rs.getLong("account")));
+    umodel.setUserName(rs.getString("username"));
+    umodel.setHashPassword(rs.getString("hash_password"));
+    umodel.setVersion(rs.getInt("version"));
+    umodel.setStatus(rs.getInt("status"));
+
+    umodel.setCreated(rs.getTimestamp("created").toLocalDateTime());
+    umodel.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
+
+    
+    return umodel;
     
   }
 

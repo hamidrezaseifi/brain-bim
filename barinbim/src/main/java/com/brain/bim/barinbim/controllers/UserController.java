@@ -29,8 +29,6 @@ public class UserController {
   public @ResponseBody List<UserModel> test() {
     logger.debug("load all users");
     
-    UserQueryModel queryModel = new UserQueryModel();
-    
-    return usersHandler.searchUsers(queryModel);
+    return usersHandler.listUsers(50);
   }
 }

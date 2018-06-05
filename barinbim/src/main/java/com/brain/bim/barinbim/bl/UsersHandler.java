@@ -21,8 +21,8 @@ public class UsersHandler {
     this.usersDao = usersDao;
   }
   
-  public List<UserModel> searchUsers(UserQueryModel queryModel){
+  public List<UserModel> listUsers(int maxCount){
     
-    return usersDao.searchUsers(queryModel);
+    return usersDao.listUsers(maxCount);
   }
 }

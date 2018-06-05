@@ -19,6 +19,6 @@ public interface UsersDao {
 
   void deleteUser(Long id, LocalDateTime updated);
 
-  List<UserModel> searchUsers(UserQueryModel queryModel);
+  List<UserModel> listUsers(int maxCount);
 
 }
