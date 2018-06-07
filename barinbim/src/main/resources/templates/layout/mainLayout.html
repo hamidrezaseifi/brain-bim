@@ -42,10 +42,15 @@
 			      <a class="navbar-brand" href="/"><img class="logo" th:src="@{/images/bim.png}" /></a>
 			    </div>
 			    
-			    <ul class="navbar navbar-nav">
-			    	<li th:each="menu : ${topMenu}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}" ><a th:href="${menu.getUrl()}"><span th:class="${menu.getClass('menu-image')}"></span>&nbsp;<span class="menu-label" th:text="${menu.getLabel()}"></span></a></li>
-			    </ul>	    
-       			    
+			    <ul class="nav navbar-nav">
+			      <li th:each="menu: ${pageMenuList}" th:if="${menu.isEnabled()}">
+			      	<a th:href="${menu.getUrl()}">
+						<span th:if="${menu.hasImage()}" th:class="${menu.getCssClass('menu-image')}"></span>
+						<span th:text="${menu.getLabel()}"></span>
+					</a>
+				  </li>
+			    </ul>
+        			    
 			    <div class="navbar-user-detail">
 			      <div class="user-detail dropdown"> 
 					<md-button ng-click="toggleRight()" style="background-color:#cecece;">
@@ -80,9 +85,46 @@
 			     </li>
 			 </ul>			
 		</div>
+
+		<div class="md-dialog-container ng-scope errorbox-container" tabindex="-1" th:fragment="errorBox" ng-show="isShowError">
+					
+			<div class="md-dialog-focus-trap" tabindex="0"></div>
+			<md-dialog aria-label="Fehler Meldung ..." class="dialog-error _md md-transition-in" role="dialog" tabindex="-1" style="">
+				<md-toolbar class="_md _md-toolbar-transitions">
+					<div class="md-toolbar-tools">
+						<h2>Fehler Meldung ...</h2>
+						<span flex="" class="flex"></span>
+							<button class="md-icon-button md-button ng-scope md-ink-ripple" type="button" ng-if="!isLoading" ng-click="closeErrorBox()" style="">
+							<i class="material-icons ng-scope">close</i>
+						</button>
+					</div>
+				</md-toolbar>
+			
+				<md-dialog-content>
+					<div class="md-dialog-content">
+					
+						{{errorMessage}}
+					
+					</div>
+				</md-dialog-content>
+			
+				<md-dialog-actions layout="row" class="layout-row">
+					<button class="md-button md-ink-ripple" type="button" ng-click="closeErrorBox()">
+						<div class="title" th:text="#{common.close}"></div>
+						<i class="material-icons ng-scope">cancel</i>
+					</button>
+				</md-dialog-actions>
+			
+			</md-dialog>
+		
+			<div class="md-dialog-focus-trap" tabindex="0"></div>
+
+		</div>
+		
+        <div ng-show="showloading == true" class="loading md-dialog-container"  th:fragment="loadingFragment"></div>
  
         <footer th:fragment="footer">
-        	<div ng-show="showloading == true" class="loading" style=""></div>
+        	
         </footer>
     </body>
 </html>

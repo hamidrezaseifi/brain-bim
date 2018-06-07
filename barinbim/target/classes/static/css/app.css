@@ -499,3 +499,38 @@ textarea:disabled, input:disabled
 }
 
 
+div.errorbox-container
+{
+	top: 0px; 
+	height: 100vh; 
+	background-color: rgba(70, 70, 70, 0.4);
+	z-index: 10000;	
+}
+
+md-dialog.dialog-error
+{
+	min-width: 500px;
+}
+
+md-dialog.dialog-error div.md-dialog-content
+{
+	color: rgb(221,44,0) !important;
+	font-weight: bold;
+}
+
+.dialog-error md-dialog-actions button i.material-icons {
+    float: right;
+}
+
+.dialog-error md-dialog-actions button div.title {
+    float: left;
+    margin-right: 6px;
+}
+
+.dialog-error md-dialog-actions button {
+    background-color: #c9c9c9;
+    line-height: 26px !important;
+    min-height: 26px !important;
+    padding: 4px 8px !important;
+}
+

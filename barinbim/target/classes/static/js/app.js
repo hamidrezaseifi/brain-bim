@@ -35,15 +35,19 @@ mdmApp.config(function($mdDateLocaleProvider) {
       return m.isValid() ? m.format('DD.MM.YYYY') : '';
     };
 
-
-    
 });
 
-mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
+mdmApp.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.timeout = 10000;
+}]);
+
+mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, $mdComponentRegistry) {
 
 	$scope.showloading = false;
+	$scope.isShowError = true;
+	$scope.errorMessage = "";
 	$scope.menulist = [];
-	$scope.okStatus = "OK";
+	
 	$scope.toggleRight = function(){
 		$mdSidenav('rightSidenav').toggle();
     };
@@ -58,23 +62,35 @@ mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $co
     
 	$('[data-toggle="tooltip"]').tooltip();   
 	
-	$http({
-		method: 'GET',
-		url: "/helper/layout/menulist"
-	}).then(function(response){
-		
-		if(response.data.status == $scope.okStatus){
-			$scope.menulist = response.data.data;
-		}
-		else
-			alert(response.data.message);
-		
-	}, function errorCallback(response){ 
-		
-		alert(response.data.message);
-		
-	});
+	$scope.ShowErrorBox = function(message){
+		$scope.errorMessage = message;
+		$scope.isShowError = true;
+    };
 	
-	  
+	$scope.closeErrorBox = function(){
+
+		$scope.isShowError = false;
+    };
+        
+    
+    if(angular.element("md-sidenav[md-component-id='rightSidenav']").length == 1){
+    	$scope.$watch(function(){
+  	      return $mdComponentRegistry.get('rightSidenav') ? $mdSidenav('rightSidenav').isOpen() : true;
+  	    }, 
+  	    function(newVal){
+  	    	if($mdSidenav('rightSidenav').isOpen()){ 
+  	    		if(!angular.element("body").hasClass("overdialog")){
+  	    			angular.element("body").addClass("overdialog");
+  	    		}
+  	    		
+  	    	} 
+  	    	else{
+  	    		angular.element("body").removeClass("overdialog");
+  	    	}
+  	});
+    }
+    
+	
+    
 
 });
