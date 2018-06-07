@@ -23,7 +23,7 @@ import com.brain.bim.barinbim.model.ui.UiToolbarItem;
 
 @Controller
 @RequestMapping(path = "/basics")
-public class BasicsController{
+public class BasicsController extends UiControllerBase{
 
   private final Logger logger = LoggerFactory.getLogger(BasicsController.class);
   

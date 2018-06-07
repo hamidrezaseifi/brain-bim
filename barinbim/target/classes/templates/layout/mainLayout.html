@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head th:fragment="pageheader">
-        <title tiles:fragment="title">MDM UI ...</title>
+        <title tiles:fragment="title">Brain Bim ...</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8">
         
@@ -36,7 +36,7 @@
     <body ng-controller="BodyController">
         
         <header th:fragment="header">
-			<nav class="navbar navbar-default" th:fragment="navbar">
+			<nav class="navbar navbar-default bimnavbar" th:fragment="navbar">
 			  <div class="container-fluid">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="/"><img class="logo" th:src="@{/images/bim.png}" /></a>
@@ -53,7 +53,7 @@
         			    
 			    <div class="navbar-user-detail">
 			      <div class="user-detail dropdown"> 
-					<md-button ng-click="toggleRight()" style="background-color:#cecece;">
+					<md-button ng-click="toggleRight()" class="navbar-user-dropdown">
 			      		<span>User, User</span>
 			      		<span class="glyphicon glyphicon-user"></span>
 					</md-button>

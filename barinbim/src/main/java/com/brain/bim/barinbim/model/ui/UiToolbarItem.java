@@ -75,6 +75,14 @@ public class UiToolbarItem {
     return image + " " + className;
   }
 
+  public boolean hasImage() {
+    return image != null && image.length() > 3;
+  }
+
+  public String getCssClass(String extraCLass) {
+    return image + " " + extraCLass;
+  }
+
   public String getImage() {
     return image;
   }

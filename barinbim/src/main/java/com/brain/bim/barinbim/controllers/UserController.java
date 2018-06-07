@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/user")
-public class UserController{
+public class UserController extends UiControllerBase{
 
   //private final Logger logger = LoggerFactory.getLogger(MainController.class);
   

@@ -27,6 +27,22 @@ body.overdialog
     margin-bottom: 0 !important;
 }
 
+.bimnavbar
+{
+	background-color: #0b0332!important;	
+}
+
+button.navbar-user-dropdown
+{
+	background-color: rgba(255, 255, 100, 0.2) !important;	
+	color: #ffffe9!important;
+}
+
+.bimnavbar ul.nav.navbar-nav li a
+{
+	color: #ffffe9 !important;
+}
+
 .navbar-brand
 {
 	padding-top: 5px !important;

@@ -18,7 +18,7 @@ import com.brain.bim.barinbim.model.UserQueryModel;
 
 @RestController
 @RequestMapping(path = "/users")
-public class UsersController {
+public class UsersController extends UiControllerBase {
   
   private final Logger logger = LoggerFactory.getLogger(UsersController.class);
 

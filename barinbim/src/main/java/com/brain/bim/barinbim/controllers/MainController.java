@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class MainController{
+public class MainController extends UiControllerBase{
 
   //private final Logger logger = LoggerFactory.getLogger(MainController.class);
   

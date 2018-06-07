@@ -38,7 +38,7 @@ public class UiControllerBase {
   @ModelAttribute
   public void addAttributes(final Model model) {
     model.addAttribute("pageMenuList", getMenus());
-    model.addAttribute("breadCrumb", breadCrumbLoader.getBreadCrumbList(getCurrentRelatedUrl()));
+    //model.addAttribute("breadCrumb", breadCrumbLoader.getBreadCrumbList(getCurrentRelatedUrl()));
 
     // builder.scheme("http");
 
