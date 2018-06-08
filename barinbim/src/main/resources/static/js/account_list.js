@@ -12,17 +12,22 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	$scope.maxRecordsList = [50, 100, 150, 200, 500, ];
 
 	$scope.dataList = [];
-	$scope.tableCustomers = false;
-	$scope.tableSettings = {pagination: false, pageSize: 12, columns:{
-		"sourceSystem": {title: 'Quellsystem', width:60,  sortable: 'sourceSystem', filter: {'sourceSystem': 'text'}, show: true, },
-		"status": {title: 'Mandat', width:60, sortable: 'tenant', filter: {'tenant': 'text'}, show: true, },
-		"created": {title: 'Mandat', width:60, sortable: 'tenant', filter: {'tenant': 'text'}, show: true, },
-	} 
+	$scope.accountsTable = false;
+	$scope.tableSettings = {pagination: false, pageSize: 12, columns:[
+		{id:"accountName", title: 'Name', width:60,  sortable: 'accountName', filter: {'accountName': 'text'}, show: true,
+			writeFunction: function(record, column){ return record[column]; }, },
+		{id:"status", title: 'Status', width:60, sortable: 'status', filter: {'status': 'text'}, show: true,
+				writeFunction: function(record, column){ return record[column]; }, },
+		{id:"created", title: 'Erstellt', width:60, sortable: 'created', filter: {'created': 'text'}, show: true,
+					writeFunction: function(record, column){ return record[column]; }, },
+	] 
 	};
 	
 
 
-	$scope.tableCustomers = createTable();
+	//$scope.accountsTable = createTable();
+	
+	searchAccounts();
 	
 	/*
 	 *  --------------------------- scope functions --------------------------------
@@ -51,7 +56,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	
 	function doChangeTableSettings(){  
 		
-		var pageSize = $scope.tableSettings.pagination ? $scope.tableSettings.pageSize : $scope.tableCustomers.total() + 1;
+		var pageSize = $scope.tableSettings.pagination ? $scope.tableSettings.pageSize : $scope.accountsTable.total() + 1;
 		var table = getCurrentTable();
 		
 		if(pageSize != table.count()){
@@ -92,7 +97,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 		return qModel;
 	}
 	
-	function searchCustomers(){
+	function searchAccounts(){
 		
 		if(!$scope.isBirthDateValid){
 			return;
@@ -103,13 +108,13 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 		qModel.sourceSystem = qModel.sourceSystem == "all" ? "" : qModel.sourceSystem;
 		
 		$scope.dataList = [];
-		$scope.tableCustomers = createTable();		
+		$scope.accountsTable = createTable();		
 		
 		$scope.$parent.showloading = true;
 
 		$http({
 			method: "POST",
-			url: $scope.searchUrl, 
+			url: "/basics/accounts/list", 
 			headers: {
 				   "Content-Type": "application/json"
 				 },
@@ -118,7 +123,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 			
 			$scope.dataList = response.data.data;
 			
-			$scope.tableCustomers = createTable();
+			$scope.accountsTable = createTable();
 			
 			$scope.$parent.showloading = false;
 		}, function errorCallback(response){ 

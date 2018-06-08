@@ -2,7 +2,9 @@
     <head>
     
     	<th:block th:include="layout/mainLayout :: pageheader" />
+    	
 		<script th:src="@{/js/account_list.js}"></script>
+        <link th:href="@{/css/accounts_list.css}" rel="stylesheet" />
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
@@ -12,19 +14,15 @@
 		<div class="floatLeft page-content" ng-controller="AccountListController" >
 			<div class="page-conent-title"  th:text="#{accounts.accounts-list}"></div>
 			
-			
+    		<div ng-table-pagination="accountsTable" class="top-pagination" template-url="'ng-table/pager.html'"></div>
 
-    		<div ng-table-pagination="tableCustomers" class="top-pagination" template-url="'ng-table/pager.html'"></div>
-
-			<table ng-table="tableCustomers" class="table customers-list" show-filter="true" >
+			<table ng-table="accountsTable" class="table accounts-list" show-filter="true" >
 			    
 				
 				<thead class="ng-scope">
 					<tr class="ng-table-sort-header">
 						<th title="" class="header row-index">					        
-							<div class="ng-table-header ng-scope">
-						            #
-						    </div>
+							<div class="ng-table-header ng-scope"> # </div>
 						</th>
 						
 						
@@ -66,36 +64,32 @@
 				</thead>
 			    
 			    <tbody>
-				    <tr ng-repeat="customer in $data" ng-class="{'goldenrow': customer.goldenRecord == true , 'sourcerow': customer.goldenRecord == false}">
+				    <tr ng-repeat="account in $data" ng-class="">
 				        <td>
 				        	<div class="general-detail">
-				            {{$index + 1 + ((tableCustomers.page() - 1) * tableCustomers.count())}}
+				            {{$index + 1 + ((accountsTable.page() - 1) * accountsTable.count())}}
 				            </div>
 				        </td>
 				               
 				        <td ng-repeat="tblColumn in tableSettings.columns" title="{{tblColumn.title}}" ng-style="tblColumn.style" ng-if="tblColumn.show">
-				        	<div class="general-detail" ng-bind-html="tblColumn.writeFunction(customer, tblColumn.id)">
+				        	<div class="general-detail" ng-bind-html="tblColumn.writeFunction(account, tblColumn.id)">
 				            
 							</div>
 				        </td>
 				
 				        <td sortable="false" class="action">
 	
-			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.showlog}" 
-			    			ng-click="showRecordLog(customer.id, $index, $event)" ng-if="false">
-								<i class="material-icons">&#xE889;</i>
-							</md-button>
-			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.summery}"  
-			    			ng-click="showRecordDetails(customer, $event)">
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.view}"  
+			    			ng-click="showRecordDetails(account, $event)">
 								<i class="material-icons">details</i>
 							</md-button>
-			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.relatedcustomers}" 
-			    			href="/customers/relatedlist/{{customer.id}}" target="_blank">
-								<i class="material-icons">list</i>
-							</md-button>
-			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.edit}" 
-			    			ng-click="editRecord(customer, $event)" ng-if="enableEditSSR || customer.goldenRecord">
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.edit}" 
+			    			ng-click="editRecord(account, $event)" ng-if="true">
 								<i class="material-icons">edit</i>
+							</md-button>
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.delete}" 
+			    			ng-click="editRecord(account, $event)" ng-if="true">
+								<i class="material-icons">delete</i>
 							</md-button>
 							
 				        </td>
@@ -110,16 +104,9 @@
 			
 		</div>
  
-		<script type="text/ng-template" id="view_customer_template">
-					<th:block th:include="dialogs/view_customer_template :: viewCustomerFragment" />
-		</script>
 
 		<script th:inline="javascript">
 		var serverConnectionError = [[#{error.serverconnectionerror}]];
-		var enableEditSSR = [[${EnableEditSSR}]];
-		var addressTypes = /*[[${valueList.getAddressTypes()}]]*/ [];
-		
-		var contactTypes = /*[[${valueList.getContactTypes()}]]*/ [];
 		
 		var tableSettings = /*[[${tableSettings}]]*/ [];
 
