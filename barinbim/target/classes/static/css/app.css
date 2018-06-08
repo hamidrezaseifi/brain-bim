@@ -10,7 +10,7 @@ body
 	position: relative !important;
     width: 100% !important;
     top: 0px !important;
-    background-color: #c4eafb !important;
+    background-color: #e6eaec!important;
 }
 
 body:not(.overdialog)
@@ -604,6 +604,7 @@ md-dialog.dialog-error div.md-dialog-content
 .page-content
 {
     padding: 10px;
+    width: calc(100vw - 180px);
 }
 
 .footer
@@ -615,6 +616,14 @@ md-dialog.dialog-error div.md-dialog-content
     padding: 3px;
     padding-top: 5px;
     padding-left: 10%;
+}
+
+.page-conent-title
+{
+	padding: 5px;
+	background-color: #dedede;
+	font-size: 26px;
+	font-weight: bold;
 }
 
 
