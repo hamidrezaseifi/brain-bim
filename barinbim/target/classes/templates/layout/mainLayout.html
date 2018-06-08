@@ -36,15 +36,15 @@
     <body ng-controller="BodyController">
         
         <header th:fragment="header">
-			<nav class="navbar navbar-default bimnavbar" th:fragment="navbar">
+			<nav class="navbar navbar-default bimnavbar bimbrain-margin-bkcolor bimbrain-margin-color" th:fragment="navbar">
 			  <div class="container-fluid">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="/"><img class="logo" th:src="@{/images/bim.png}" /></a>
 			    </div>
 			    
 			    <ul class="nav navbar-nav">
-			      <li th:each="menu: ${pageMenuList}" th:if="${menu.isEnabled()}">
-			      	<a th:href="${menu.getUrl()}">
+			      <li th:each="menu: ${pageTopToolList}" th:if="${menu.isEnabled()}">
+			      	<a th:href="${menu.getUrl()}" class="bimbrain-margin-color">
 						<span th:if="${menu.hasImage()}" th:class="${menu.getCssClass('menu-image')}"></span>
 						<span th:text="${menu.getLabel()}"></span>
 					</a>
@@ -53,7 +53,7 @@
         			    
 			    <div class="navbar-user-detail">
 			      <div class="user-detail dropdown"> 
-					<md-button ng-click="toggleRight()" class="navbar-user-dropdown">
+					<md-button ng-click="toggleRight()" class="navbar-user-dropdown bimbrain-margin-color">
 			      		<span>User, User</span>
 			      		<span class="glyphicon glyphicon-user"></span>
 					</md-button>
@@ -85,7 +85,26 @@
 			     </li>
 			 </ul>			
 		</div>
+		
+		<div th:fragment="leftToolbar" class="leftToolbar floatLeft bimbrain-margin-bkcolor bimbrain-margin-color">
+			<a th:each="menu: ${pageLeftToolList}" th:if="${menu.isEnabled()}" th:href="${menu.getUrl()}">
+				<div class="bimbrain-margin-color lefttoolbar-item">
+					<span th:if="${menu.hasImage()}" th:class="${menu.getCssClass('menu-image')}"></span>
+					<span th:text="${menu.getLabel()}"></span>
+				
+				</div>
+			</a>
+		</div>
 
+		<div th:fragment="footer">
+		<div class="clear" ></div>
+
+        <footer class="footer bimbrain-margin-bkcolor bimbrain-margin-color">
+        	Braib Bim @2018
+        </footer>
+		
+		</div>
+        
 		<div class="md-dialog-container ng-scope errorbox-container" tabindex="-1" th:fragment="errorBox" ng-show="isShowError">
 					
 			<div class="md-dialog-focus-trap" tabindex="0"></div>
@@ -123,8 +142,5 @@
 		
         <div ng-show="showloading == true" class="loading md-dialog-container"  th:fragment="loadingFragment"></div>
  
-        <footer th:fragment="footer">
-        	
-        </footer>
     </body>
 </html>

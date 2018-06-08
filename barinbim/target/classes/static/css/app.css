@@ -27,20 +27,36 @@ body.overdialog
     margin-bottom: 0 !important;
 }
 
+.bimbrain-margin-bkcolor
+{
+	background-color: #0b0332!important;		
+}
+
+.bimbrain-margin-color
+{
+	color: #ffffe9!important;
+	
+}
+
 .bimnavbar
 {
-	background-color: #0b0332!important;	
+	border: none!important;	
 }
 
 button.navbar-user-dropdown
 {
 	background-color: rgba(255, 255, 100, 0.2) !important;	
-	color: #ffffe9!important;
 }
 
-.bimnavbar ul.nav.navbar-nav li a
+.bimnavbar ul.nav.navbar-nav 
 {
-	color: #ffffe9 !important;
+	margin-left: 50px;
+}
+
+.bimnavbar ul.nav.navbar-nav li:hover 
+{
+	border-radius: 0;
+	background-color: rgba(255, 255, 255, 0.3);
 }
 
 .navbar-brand
@@ -549,4 +565,56 @@ md-dialog.dialog-error div.md-dialog-content
     min-height: 26px !important;
     padding: 4px 8px !important;
 }
+
+.leftToolbar
+{
+	border: none!important;	
+	margin: 0;
+	width: 150px;
+    height: calc(100vh - 85px);
+    padding: 10px;
+    padding-top: 35px;
+}
+
+.leftToolbar a, .leftToolbar a:hover, .leftToolbar a:active, .leftToolbar a:visited
+{
+	text-decoration: none;
+}
+
+.leftToolbar .lefttoolbar-item
+{
+	margin: 5px;
+	margin-top: 10px;
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.leftToolbar .lefttoolbar-item:hover
+{
+	border-radius: 0;
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.floatLeft
+{
+	float: left;	
+}
+
+.page-content
+{
+    padding: 10px;
+}
+
+.footer
+{
+	border: none!important;	
+	margin: 0;
+	height: 35px;
+	line-height: 35px;
+    padding: 3px;
+    padding-top: 5px;
+    padding-left: 10%;
+}
+
 

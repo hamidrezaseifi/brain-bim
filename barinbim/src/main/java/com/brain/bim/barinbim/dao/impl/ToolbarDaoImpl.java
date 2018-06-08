@@ -34,8 +34,7 @@ public class ToolbarDaoImpl implements ToolbarDao {
   public List<UiToolbarItem> listToolbarItems() {
     // TODO Auto-generated method stub
     return queryForToolbarItems("", null);
-  }
-  
+  }  
 
   private List<UiToolbarItem> queryForToolbarItems(String parrent, UiToolbarItem parentItem) {
     

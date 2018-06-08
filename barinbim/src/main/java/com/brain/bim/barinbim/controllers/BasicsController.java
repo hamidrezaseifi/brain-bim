@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.brain.bim.barinbim.bl.AccountsHandler;
+import com.brain.bim.barinbim.controllers.base.UiControllerBase;
 import com.brain.bim.barinbim.exceptions.UiRestResponse;
 import com.brain.bim.barinbim.helper.UiToolbarManager;
 import com.brain.bim.barinbim.model.AccountModel;
@@ -29,34 +30,14 @@ public class BasicsController extends UiControllerBase{
   
   @Autowired
   private AccountsHandler accountsHandler;
-  
-  @Autowired
-  private UiToolbarManager menuManager;
 
-  private List<UiToolbarItem> topMenuList = null;
-  private List<UiToolbarItem> leftMenuList = null;
-  
-  private List<UiToolbarItem> getTopMenuList() {
-    if(topMenuList == null) {
-      topMenuList = menuManager.getTopMenus();
-    }
-    
-    for(UiToolbarItem item : topMenuList) {
-      if(item.getUrl().startsWith("/basics/")) {
-        item.setActive(true);
-        leftMenuList = item.getChildren();
-        break;
-      }
-    }
-    
-    return topMenuList;
-  }
+  @Autowired
+  private UiToolbarManager toolbarManager;
   
   @GetMapping("/")
   public String index(final Model model) {
     //logger.debug("test");
-    model.addAttribute("topMenu", getTopMenuList());
-    model.addAttribute("leftMenu", leftMenuList);
+
     
     return "basics/basics_index";
   }
@@ -86,4 +67,9 @@ public class BasicsController extends UiControllerBase{
     
     return UiRestResponse.createDataResponse(list);
   }  
+
+  
+  protected List<UiToolbarItem> getLeftToolbar() {
+    return toolbarManager.getChildToolbars("menu.basicdata");
+  }
 }

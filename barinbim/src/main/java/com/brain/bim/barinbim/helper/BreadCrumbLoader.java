@@ -33,8 +33,8 @@ public class BreadCrumbLoader {
 
     final ArrayList<BreadCrumb> list = new ArrayList<>();
 
-    UiToolbarItem home = menuManager.getMenuItemByUrl("/");
-    final UiToolbarItem item = menuManager.getMenuItemByUrl(url);
+    UiToolbarItem home = menuManager.getToolbarItemByUrl(("/"));
+    final UiToolbarItem item = menuManager.getToolbarItemByUrl(url);
     UiToolbarItem temp = item;
 
     while (temp != null) {

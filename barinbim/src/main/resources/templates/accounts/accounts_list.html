@@ -7,10 +7,13 @@
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+       	<div th:replace="layout/mainLayout :: leftToolbar" ></div>
 
-        <h1>Accounts Index Page ...</h1>
+		<div class="floatLeft page-content" >
+			<h1>Accounts Index Page</h1>
+		</div>
+ 
 
-
-        <footer th:replace="layout/mainLayout :: footer" ></footer>
-    </body>
+		<th:block th:include="layout/mainLayout :: footer" />
+     </body>
 </html>

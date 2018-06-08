@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UiToolbarManager {
 
-  private List<UiToolbarItem> menus;
+  private List<UiToolbarItem> toolbas;
 
   @Autowired
   private ToolbarDao toolbarDao;
@@ -32,7 +32,7 @@ public class UiToolbarManager {
   MessagesHelper messagesHelper;
   
   public UiToolbarManager() {
-    menus = new ArrayList<>();
+    toolbas = new ArrayList<>();
   }
 
   @PostConstruct
@@ -42,20 +42,16 @@ public class UiToolbarManager {
     for(int i=0; i<menulist.size(); i++){
       menulist.get(i).setLabelMessage(messagesHelper);
     }
-    menus.addAll(menulist);
+    toolbas.addAll(menulist);
 
   }
 
-  public List<UiToolbarItem> getMenus() {
-    return menus;
+  public List<UiToolbarItem> getToolbars() {
+    return toolbas;
   }
 
-  public void setMenus(final List<UiToolbarItem> menus) {
-    this.menus = menus;
-  }
-
-  public UiToolbarItem getMenuItemByUrl(final String url) {
-    for (final UiToolbarItem item : menus) {
+  public UiToolbarItem getToolbarItemByUrl(final String url) {
+    for (final UiToolbarItem item : toolbas) {
       final UiToolbarItem f = item.getMenuItemByUrl(url);
       if (f != null) {
         return f;
@@ -65,10 +61,10 @@ public class UiToolbarManager {
     return null;
   }
   
-  public List<UiToolbarItem> getTopMenus() {
+  public List<UiToolbarItem> getTopToolbars() {
     List<UiToolbarItem> topmenus = new ArrayList<UiToolbarItem>();
     
-    for (final UiToolbarItem item : menus) {
+    for (final UiToolbarItem item : toolbas) {
       if(item.getType().equals("top")) {
         topmenus.add(item.clone(false));  
       }
@@ -77,10 +73,10 @@ public class UiToolbarManager {
     return topmenus;
   }
   
-  public List<UiToolbarItem> getChildMenus(String id) {
+  public List<UiToolbarItem> getChildToolbars(String id) {
     List<UiToolbarItem> topmenus = new ArrayList<UiToolbarItem>();
     
-    for (final UiToolbarItem item : menus) {
+    for (final UiToolbarItem item : toolbas) {
       if(item.getId().equals(id)) {
         topmenus.addAll(item.getChildren());
       }

@@ -174,7 +174,7 @@ public class UiToolbarItem {
   }
 
   public void setLabelMessage(MessagesHelper messagesHelper) {
-    this.label = messagesHelper != null ? messagesHelper.get(id) : label; 
+    this.label = messagesHelper != null ? messagesHelper.get(this.label) : label; 
     for(int i=0; i<children.size(); i++){
       children.get(i).setLabelMessage(messagesHelper);
     }
