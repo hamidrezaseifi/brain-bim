@@ -1,8 +1,8 @@
 
 
-var mdmApp = angular.module('mdmApp', ['ngMaterial', 'ngTable', 'ngMaterialAccordion']);
+var brainApp = angular.module('brainApp', ['ngMaterial', 'ngTable', 'ngMaterialAccordion']);
 
-mdmApp.config(function($mdDateLocaleProvider) {
+brainApp.config(function($mdDateLocaleProvider) {
 
     // Example of a French localization.
     $mdDateLocaleProvider.months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni','Juli', 'August', 'September', 'October', 'November', 'Dezember',];
@@ -37,11 +37,8 @@ mdmApp.config(function($mdDateLocaleProvider) {
 
 });
 
-mdmApp.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.timeout = 10000;
-}]);
 
-mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, $mdComponentRegistry) {
+brainApp.controller('BodyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, $mdComponentRegistry) {
 
 	$scope.showloading = false;
 	$scope.isShowError = true;

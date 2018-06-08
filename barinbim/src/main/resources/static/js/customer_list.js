@@ -1,5 +1,5 @@
 
-mdmApp.controller('CustomerListController', function ($scope, $http, $sce, $element, $compile, NgTableParams, 
+brainApp.controller('CustomerListController', function ($scope, $http, $sce, $element, $compile, NgTableParams, 
 		ngTableEventsChannel, $mdSidenav, $mdDialog, $timeout, $mdComponentRegistry) {
 
 	/*

@@ -1,0 +1,234 @@
+﻿<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="brainApp" >
+    <head>
+    
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+		<script th:src="@{/js/index.js}"></script>
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+       	<div th:replace="layout/mainLayout :: leftToolbar" ></div>
+
+		<div class="floatLeft page-content" >
+			<div class="page-conent-title"  th:text="#{accounts.accounts-list}">
+				
+			</div>
+			
+       	<md-toolbar layout="row" style="min-height:20px;" class="top-toolbar">
+
+        		<div flex layout="column">
+        		
+        			<form ng-submit="reload($event)" >
+        		
+		        		<div layout="row" style="height:62px;">
+		        		
+			         		<md-input-container layout="row" class="md-block" flex-gt-xs>
+								<label th:text="#{customer.sourcesystem}"></label>
+								<md-select ng-model="queryModel.sourceSystem">
+									<md-option value="all" th:text="#{customer.allsourcesystems}"></md-option>
+									<md-option th:each="system : ${valueList.getSourceSystems()}" th:value="${system}" th:text="${system}"></md-option>
+								</md-select>
+					        </md-input-container>
+			          
+			         		<md-input-container layout="row" class="md-block" flex-gt-xs>
+								<label th:text="#{customer.tenant}"></label>
+								<md-select ng-model="queryModel.tenant">
+									<md-option th:each="tenant,iter : ${valueList.getTenants()}" th:selected="${iter.index==0} " th:value="${tenant}" th:text="${tenant}"></md-option>
+								</md-select>
+					        </md-input-container>
+			          
+							<md-input-container>
+					            <label th:text="#{customer.sourcesystemcustomerid_short}"></label>
+					            <input ng-model="queryModel.sourceSystemCustomerId" class="add-clear" />
+					            
+								  <button type="button" mat-button ng-If="queryModel.sourceSystemCustomerId != '' && queryModel.sourceSystemCustomerId != null" matSuffix mat-icon-button class="clear-button" ng-click="queryModel.sourceSystemCustomerId=''">
+								    <i class="material-icons">clear</i>
+								  </button>
+					            
+			          		</md-input-container>
+			                    
+							<md-input-container>
+					            <label th:text="#{customer.lastname}"></label>
+					            <input ng-model="queryModel.lastName" class="add-clear" />
+					            
+								  <button type="button" mat-button ng-If="queryModel.lastName != ''" matSuffix mat-icon-button class="clear-button" ng-click="queryModel.lastName=''">
+								    <i class="material-icons">clear</i>
+								  </button>
+			          		</md-input-container>
+			                    
+							<md-input-container>
+					            <label th:text="#{customer.firstname}"></label>
+					            <input ng-model="queryModel.firstName" class="add-clear" />
+					            
+								  <button type="button" mat-button ng-If="queryModel.firstName != ''" matSuffix mat-icon-button class="clear-button" ng-click="queryModel.firstName=''">
+								    <i class="material-icons">clear</i>
+								  </button>
+			          		</md-input-container>
+			                    
+							<md-input-container style="max-width: 250px !important;">
+					            <label th:text="#{customer.birthdate}"></label>
+					            <md-datepicker ng-model="queryModel.dateOfBirth" class="searchBDate"required="" ng-blur="validateBirthDate()"></md-datepicker>
+								<div class="err-message" ng-hide="isBirthDateValid">ungültiges datum</div>
+			          		</md-input-container>
+			                    
+							<md-button class="md-fab md-button md-ink-ripple md-mini search-button" ng-click="reload($event)" ng-disabled="!isBirthDateValid">
+								<md-icon md-svg-src="/images/icons/search.svg"></md-icon>
+							</md-button>
+			        
+							<md-button class="md-fab md-button md-ink-ripple md-mini" ng-click="test()" ng-if="false">
+								<md-icon md-svg-src="/images/icons/filter.svg"></md-icon>
+							</md-button>
+			        
+							<md-button class="md-fab md-button md-ink-ripple md-mini" ng-click="addSearchItem()" ng-if="false">
+								<md-icon md-svg-src="/images/icons/filter.svg"></md-icon>
+							</md-button>
+			        
+							<span flex></span>
+			         		<md-input-container layout="row" style="width: 150px;">
+								<label th:text="#{customer.maxrecords}"></label>
+								<md-select ng-model="queryModel.maxRecords">
+									<md-option ng-repeat="maxRec in maxRecordsList" value="{{maxRec}}">
+									{{maxRec}}
+									</md-option>
+								</md-select>
+					        </md-input-container>
+							
+		        		</div>
+		        		
+		        		<div flex layout="row" style="">
+					      <md-chips ng-model="queryModel.extraItems" readonly = "true">
+							<md-chip-template>
+				                  <div><strong>{{$chip.key}}</strong> {{$chip.type}} <em>{{$chip.value}}</em></div>  
+									<button class="md-chip-remove ng-scope" ng-click="$mdChipsCtrl.removeChipAndFocusInput($$replacedScope.$index)" type="button" aria-hidden="true" tabindex="-1">
+										<i class="material-icons">&#xE5CD;</i>       
+									</button>
+				            </md-chip-template>
+				         
+				            			        
+					      </md-chips>
+						        		
+						</div>
+						<input type="submit" style="display:none">
+					</form>
+				</div>        		
+				<md-button class="md-fab md-button md-ink-ripple md-mini" ng-click="toggleOptionsSidenav()">
+					<md-icon md-svg-src="/images/icons/settings.svg"></md-icon>
+				</md-button>
+        
+        	</md-toolbar>
+			
+
+    		<div ng-table-pagination="tableCustomers" class="top-pagination" template-url="'ng-table/pager.html'"></div>
+
+			<table ng-table="tableCustomers" class="table customers-list" show-filter="true" >
+			    
+				
+				<thead class="ng-scope">
+					<tr class="ng-table-sort-header">
+						<th title="" class="header row-index">					        
+							<div class="ng-table-header ng-scope">
+						            #
+						    </div>
+						</th>
+						
+						
+						<th title="" ng-repeat="tblColumn in tableSettings.columns" ng-if="tblColumn.show" 
+						class="header" role="button"
+						ng-class="{
+                    'sortable': tblColumn.sortable,
+                    'sort-asc': params.sorting()[tblColumn.sortable]=='asc',
+                    'sort-desc': params.sorting()[tblColumn.sortable]=='desc'
+                  }" ng-click="tblColumn.sortable && sortColumn(tblColumn, $event)" >
+							<div class="ng-table-header ng-scope" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'div'}">
+						    	<span ng-class="{'sort-indicator': params.settings().sortingIndicator == 'span'}" class="ng-binding sort-indicator">{{tblColumn.title}}</span>
+						    </div>
+						</th>
+
+						<th title="" class="header action">					        
+							
+						</th>
+					</tr>
+					<tr ng-show="show_filter" class="ng-table-filters" aria-hidden="false" ng-if="$data.length > 0">
+						<th class="row-index">
+					        
+						</th>				
+
+						<th ng-repeat="tblColumn in tableSettings.columns" ng-if="tblColumn.show" class="filter " 
+							ng-class="params.settings().filterOptions.filterLayout === 'horizontal' ? 'filter-horizontal' : ''">
+						        <div ng-repeat="(name, filter) in tblColumn.filter" 
+						        	class="filter-cell ng-scope s12 last" ng-class="[getFilterCellCss($column.filter(this), params.settings().filterOptions.filterLayout), $last ? 'last' : '']">
+						        		<input type="text" name="{{tblColumn.id}}" ng-model="params.filter()[name]" class="input-filter form-control ng-pristine ng-valid ng-scope ng-empty ng-touched" placeholder="" aria-invalid="false" style="">
+					        			<span class="clear-filter ng-scope" ng-click="clearFilter($event, this)" role="button" tabindex="0"><i class="material-icons">clear</i>
+					        			</span>
+								</div>
+						</th>	
+						
+						<th class="action">
+					       
+						</th>				
+					</tr>
+				</thead>
+			    
+			    <tbody>
+				    <tr ng-repeat="customer in $data" ng-class="{'goldenrow': customer.goldenRecord == true , 'sourcerow': customer.goldenRecord == false}">
+				        <td>
+				        	<div class="general-detail">
+				            {{$index + 1 + ((tableCustomers.page() - 1) * tableCustomers.count())}}
+				            </div>
+				        </td>
+				               
+				        <td ng-repeat="tblColumn in tableSettings.columns" title="{{tblColumn.title}}" ng-style="tblColumn.style" ng-if="tblColumn.show">
+				        	<div class="general-detail" ng-bind-html="tblColumn.writeFunction(customer, tblColumn.id)">
+				            
+							</div>
+				        </td>
+				
+				        <td sortable="false" class="action">
+	
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.showlog}" 
+			    			ng-click="showRecordLog(customer.id, $index, $event)" ng-if="false">
+								<i class="material-icons">&#xE889;</i>
+							</md-button>
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.summery}"  
+			    			ng-click="showRecordDetails(customer, $event)">
+								<i class="material-icons">details</i>
+							</md-button>
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.relatedcustomers}" 
+			    			href="/customers/relatedlist/{{customer.id}}" target="_blank">
+								<i class="material-icons">list</i>
+							</md-button>
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.edit}" 
+			    			ng-click="editRecord(customer, $event)" ng-if="enableEditSSR || customer.goldenRecord">
+								<i class="material-icons">edit</i>
+							</md-button>
+							
+				        </td>
+				
+				    </tr>
+				    
+				    <tr ng-if="$data.length == 0" class="nodata"><td colspan="20" th:text="#{common.nodata}"></td></tr>
+			    </tbody>
+			</table>
+			
+			
+			
+		</div>
+ 
+		<script type="text/ng-template" id="view_customer_template">
+					<th:block th:include="dialogs/view_customer_template :: viewCustomerFragment" />
+		</script>
+
+		<script th:inline="javascript">
+		var serverConnectionError = [[#{error.serverconnectionerror}]];
+		var enableEditSSR = [[${EnableEditSSR}]];
+		var addressTypes = /*[[${valueList.getAddressTypes()}]]*/ [];
+		
+		var contactTypes = /*[[${valueList.getContactTypes()}]]*/ [];
+		
+		var tableSettings = /*[[${tableSettings}]]*/ [];
+
+		</script>
+
+		<th:block th:include="layout/mainLayout :: footer" />
+     </body>
+</html>

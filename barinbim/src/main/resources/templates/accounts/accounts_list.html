@@ -1,121 +1,17 @@
-﻿<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="mdmApp" >
+﻿<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org"  ng-app="brainApp" >
     <head>
     
     	<th:block th:include="layout/mainLayout :: pageheader" />
-		<script th:src="@{/js/index.js}"></script>
+		<script th:src="@{/js/account_list.js}"></script>
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
        	<div th:replace="layout/mainLayout :: leftToolbar" ></div>
 
-		<div class="floatLeft page-content" >
-			<div class="page-conent-title"  th:text="#{accounts.accounts-list}">
-				
-			</div>
+		<div class="floatLeft page-content" ng-controller="AccountListController" >
+			<div class="page-conent-title"  th:text="#{accounts.accounts-list}"></div>
 			
-       	<md-toolbar layout="row" style="min-height:20px;" class="top-toolbar">
-
-        		<div flex layout="column">
-        		
-        			<form ng-submit="reload($event)" >
-        		
-		        		<div layout="row" style="height:62px;">
-		        		
-			         		<md-input-container layout="row" class="md-block" flex-gt-xs>
-								<label th:text="#{customer.sourcesystem}"></label>
-								<md-select ng-model="queryModel.sourceSystem">
-									<md-option value="all" th:text="#{customer.allsourcesystems}"></md-option>
-									<md-option th:each="system : ${valueList.getSourceSystems()}" th:value="${system}" th:text="${system}"></md-option>
-								</md-select>
-					        </md-input-container>
-			          
-			         		<md-input-container layout="row" class="md-block" flex-gt-xs>
-								<label th:text="#{customer.tenant}"></label>
-								<md-select ng-model="queryModel.tenant">
-									<md-option th:each="tenant,iter : ${valueList.getTenants()}" th:selected="${iter.index==0} " th:value="${tenant}" th:text="${tenant}"></md-option>
-								</md-select>
-					        </md-input-container>
-			          
-							<md-input-container>
-					            <label th:text="#{customer.sourcesystemcustomerid_short}"></label>
-					            <input ng-model="queryModel.sourceSystemCustomerId" class="add-clear" />
-					            
-								  <button type="button" mat-button ng-If="queryModel.sourceSystemCustomerId != '' && queryModel.sourceSystemCustomerId != null" matSuffix mat-icon-button class="clear-button" ng-click="queryModel.sourceSystemCustomerId=''">
-								    <i class="material-icons">clear</i>
-								  </button>
-					            
-			          		</md-input-container>
-			                    
-							<md-input-container>
-					            <label th:text="#{customer.lastname}"></label>
-					            <input ng-model="queryModel.lastName" class="add-clear" />
-					            
-								  <button type="button" mat-button ng-If="queryModel.lastName != ''" matSuffix mat-icon-button class="clear-button" ng-click="queryModel.lastName=''">
-								    <i class="material-icons">clear</i>
-								  </button>
-			          		</md-input-container>
-			                    
-							<md-input-container>
-					            <label th:text="#{customer.firstname}"></label>
-					            <input ng-model="queryModel.firstName" class="add-clear" />
-					            
-								  <button type="button" mat-button ng-If="queryModel.firstName != ''" matSuffix mat-icon-button class="clear-button" ng-click="queryModel.firstName=''">
-								    <i class="material-icons">clear</i>
-								  </button>
-			          		</md-input-container>
-			                    
-							<md-input-container style="max-width: 250px !important;">
-					            <label th:text="#{customer.birthdate}"></label>
-					            <md-datepicker ng-model="queryModel.dateOfBirth" class="searchBDate"required="" ng-blur="validateBirthDate()"></md-datepicker>
-								<div class="err-message" ng-hide="isBirthDateValid">ungültiges datum</div>
-			          		</md-input-container>
-			                    
-							<md-button class="md-fab md-button md-ink-ripple md-mini search-button" ng-click="reload($event)" ng-disabled="!isBirthDateValid">
-								<md-icon md-svg-src="/images/icons/search.svg"></md-icon>
-							</md-button>
-			        
-							<md-button class="md-fab md-button md-ink-ripple md-mini" ng-click="test()" ng-if="false">
-								<md-icon md-svg-src="/images/icons/filter.svg"></md-icon>
-							</md-button>
-			        
-							<md-button class="md-fab md-button md-ink-ripple md-mini" ng-click="addSearchItem()" ng-if="false">
-								<md-icon md-svg-src="/images/icons/filter.svg"></md-icon>
-							</md-button>
-			        
-							<span flex></span>
-			         		<md-input-container layout="row" style="width: 150px;">
-								<label th:text="#{customer.maxrecords}"></label>
-								<md-select ng-model="queryModel.maxRecords">
-									<md-option ng-repeat="maxRec in maxRecordsList" value="{{maxRec}}">
-									{{maxRec}}
-									</md-option>
-								</md-select>
-					        </md-input-container>
-							
-		        		</div>
-		        		
-		        		<div flex layout="row" style="">
-					      <md-chips ng-model="queryModel.extraItems" readonly = "true">
-							<md-chip-template>
-				                  <div><strong>{{$chip.key}}</strong> {{$chip.type}} <em>{{$chip.value}}</em></div>  
-									<button class="md-chip-remove ng-scope" ng-click="$mdChipsCtrl.removeChipAndFocusInput($$replacedScope.$index)" type="button" aria-hidden="true" tabindex="-1">
-										<i class="material-icons">&#xE5CD;</i>       
-									</button>
-				            </md-chip-template>
-				         
-				            			        
-					      </md-chips>
-						        		
-						</div>
-						<input type="submit" style="display:none">
-					</form>
-				</div>        		
-				<md-button class="md-fab md-button md-ink-ripple md-mini" ng-click="toggleOptionsSidenav()">
-					<md-icon md-svg-src="/images/icons/settings.svg"></md-icon>
-				</md-button>
-        
-        	</md-toolbar>
 			
 
     		<div ng-table-pagination="tableCustomers" class="top-pagination" template-url="'ng-table/pager.html'"></div>

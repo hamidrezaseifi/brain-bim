@@ -1,25 +1,129 @@
-﻿<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="mdmApp" >
+﻿<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org"  ng-app="brainApp" >
     <head>
     
     	<th:block th:include="layout/mainLayout :: pageheader" />
-		<script th:src="@{/js/index.js}"></script>
+		<script th:src="@{/js/account_list.js}"></script>
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
        	<div th:replace="layout/mainLayout :: leftToolbar" ></div>
 
-		<div class="floatLeft page-content" >
-			<div class="page-conent-title"  th:text="#{accounts.accounts-list}">
+		<div class="floatLeft page-content" ng-controller="AccountListController" >
+			<div class="page-conent-title"  th:text="#{accounts.accounts-list}"></div>
+			
+			
+
+    		<div ng-table-pagination="tableCustomers" class="top-pagination" template-url="'ng-table/pager.html'"></div>
+
+			<table ng-table="tableCustomers" class="table customers-list" show-filter="true" >
+			    
 				
-			</div>
-			
-			
+				<thead class="ng-scope">
+					<tr class="ng-table-sort-header">
+						<th title="" class="header row-index">					        
+							<div class="ng-table-header ng-scope">
+						            #
+						    </div>
+						</th>
+						
+						
+						<th title="" ng-repeat="tblColumn in tableSettings.columns" ng-if="tblColumn.show" 
+						class="header" role="button"
+						ng-class="{
+                    'sortable': tblColumn.sortable,
+                    'sort-asc': params.sorting()[tblColumn.sortable]=='asc',
+                    'sort-desc': params.sorting()[tblColumn.sortable]=='desc'
+                  }" ng-click="tblColumn.sortable && sortColumn(tblColumn, $event)" >
+							<div class="ng-table-header ng-scope" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'div'}">
+						    	<span ng-class="{'sort-indicator': params.settings().sortingIndicator == 'span'}" class="ng-binding sort-indicator">{{tblColumn.title}}</span>
+						    </div>
+						</th>
+
+						<th title="" class="header action">					        
+							
+						</th>
+					</tr>
+					<tr ng-show="show_filter" class="ng-table-filters" aria-hidden="false" ng-if="$data.length > 0">
+						<th class="row-index">
+					        
+						</th>				
+
+						<th ng-repeat="tblColumn in tableSettings.columns" ng-if="tblColumn.show" class="filter " 
+							ng-class="params.settings().filterOptions.filterLayout === 'horizontal' ? 'filter-horizontal' : ''">
+						        <div ng-repeat="(name, filter) in tblColumn.filter" 
+						        	class="filter-cell ng-scope s12 last" ng-class="[getFilterCellCss($column.filter(this), params.settings().filterOptions.filterLayout), $last ? 'last' : '']">
+						        		<input type="text" name="{{tblColumn.id}}" ng-model="params.filter()[name]" class="input-filter form-control ng-pristine ng-valid ng-scope ng-empty ng-touched" placeholder="" aria-invalid="false" style="">
+					        			<span class="clear-filter ng-scope" ng-click="clearFilter($event, this)" role="button" tabindex="0"><i class="material-icons">clear</i>
+					        			</span>
+								</div>
+						</th>	
+						
+						<th class="action">
+					       
+						</th>				
+					</tr>
+				</thead>
+			    
+			    <tbody>
+				    <tr ng-repeat="customer in $data" ng-class="{'goldenrow': customer.goldenRecord == true , 'sourcerow': customer.goldenRecord == false}">
+				        <td>
+				        	<div class="general-detail">
+				            {{$index + 1 + ((tableCustomers.page() - 1) * tableCustomers.count())}}
+				            </div>
+				        </td>
+				               
+				        <td ng-repeat="tblColumn in tableSettings.columns" title="{{tblColumn.title}}" ng-style="tblColumn.style" ng-if="tblColumn.show">
+				        	<div class="general-detail" ng-bind-html="tblColumn.writeFunction(customer, tblColumn.id)">
+				            
+							</div>
+				        </td>
+				
+				        <td sortable="false" class="action">
+	
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.showlog}" 
+			    			ng-click="showRecordLog(customer.id, $index, $event)" ng-if="false">
+								<i class="material-icons">&#xE889;</i>
+							</md-button>
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.summery}"  
+			    			ng-click="showRecordDetails(customer, $event)">
+								<i class="material-icons">details</i>
+							</md-button>
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.relatedcustomers}" 
+			    			href="/customers/relatedlist/{{customer.id}}" target="_blank">
+								<i class="material-icons">list</i>
+							</md-button>
+			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{customer.edit}" 
+			    			ng-click="editRecord(customer, $event)" ng-if="enableEditSSR || customer.goldenRecord">
+								<i class="material-icons">edit</i>
+							</md-button>
+							
+				        </td>
+				
+				    </tr>
+				    
+				    <tr ng-if="$data.length == 0" class="nodata"><td colspan="20" th:text="#{common.nodata}"></td></tr>
+			    </tbody>
+			</table>
 			
 			
 			
 		</div>
  
+		<script type="text/ng-template" id="view_customer_template">
+					<th:block th:include="dialogs/view_customer_template :: viewCustomerFragment" />
+		</script>
+
+		<script th:inline="javascript">
+		var serverConnectionError = [[#{error.serverconnectionerror}]];
+		var enableEditSSR = [[${EnableEditSSR}]];
+		var addressTypes = /*[[${valueList.getAddressTypes()}]]*/ [];
+		
+		var contactTypes = /*[[${valueList.getContactTypes()}]]*/ [];
+		
+		var tableSettings = /*[[${tableSettings}]]*/ [];
+
+		</script>
 
 		<th:block th:include="layout/mainLayout :: footer" />
      </body>
