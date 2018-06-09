@@ -10,7 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.brain.bim.barinbim.helper.BreadCrumbLoader;
 import com.brain.bim.barinbim.helper.UiToolbarManager;
-import com.brain.bim.barinbim.model.ui.UiToolbarItem;
+import com.brain.bim.barinbim.model.gui.UiToolbarItem;
 
 @Controller
 public abstract class UiControllerBase {

@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.brain.bim.barinbim.model.ui.BreadCrumb;
-import com.brain.bim.barinbim.model.ui.UiToolbarItem;
+import com.brain.bim.barinbim.model.gui.BreadCrumb;
+import com.brain.bim.barinbim.model.gui.UiToolbarItem;
 
 /**
  * a class to manage BreadCrumb items for each page

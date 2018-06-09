@@ -7,23 +7,28 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	 */	
 
 	
-	$scope.queryModel = {name: "", status: "", created: ""};
+	$scope.queryModel = {name: "", status: -1, created: ""};
 	
 	$scope.maxRecordsList = [50, 100, 150, 200, 500, ];
 
 	$scope.dataList = [];
 	$scope.accountsTable = false;
-	$scope.tableSettings = {pagination: false, pageSize: 12, columns:[
-		{id:"accountName", title: 'Name', width:60,  sortable: 'accountName', filter: {'accountName': 'text'}, show: true,
-			writeFunction: function(record, column){ return record[column]; }, },
-		{id:"status", title: 'Status', width:60, sortable: 'status', filter: {'status': 'text'}, show: true,
-				writeFunction: function(record, column){ return record[column]; }, },
-		{id:"created", title: 'Erstellt', width:60, sortable: 'created', filter: {'created': 'text'}, show: true,
-					writeFunction: function(record, column){ return record[column]; }, },
-	] 
+		
+	tableColumns.accountName.writeFunction = function(record){ 
+		return record["accountName"]; 
+	};
+
+	tableColumns.statusLabel.writeFunction = function(record){ 
+		return record["statusLabel"]; 
+	};
+
+	tableColumns.created.writeFunction = function(record){ 
+		var m = moment(record["created"]);
+		return m.format('DD.MM.YYYY');
 	};
 	
-
+	$scope.tableSettings = {pagination: false, pageSize: 12, columns: tableColumns };
+	
 
 	//$scope.accountsTable = createTable();
 	
@@ -48,6 +53,10 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 		doChangeTableSettings();
 	};
 
+	$scope.sortColumn = function(tblColumn, ev){
+		
+		
+	}
 	
 /*
  *  --------------------------- custome functions --------------------------------
@@ -99,13 +108,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	
 	function searchAccounts(){
 		
-		if(!$scope.isBirthDateValid){
-			return;
-		}
-		
 		var qModel = prepareQueryModel();
-		
-		qModel.sourceSystem = qModel.sourceSystem == "all" ? "" : qModel.sourceSystem;
 		
 		$scope.dataList = [];
 		$scope.accountsTable = createTable();		
@@ -114,13 +117,13 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 
 		$http({
 			method: "POST",
-			url: "/basics/accounts/list", 
+			url: "/basics/accounts/search", 
 			headers: {
 				   "Content-Type": "application/json"
 				 },
 		    data: qModel				
 		}).then(function(response){
-			
+
 			$scope.dataList = response.data.data;
 			
 			$scope.accountsTable = createTable();

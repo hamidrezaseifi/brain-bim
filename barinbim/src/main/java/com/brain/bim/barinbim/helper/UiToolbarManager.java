@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import com.brain.bim.barinbim.dao.ToolbarDao;
-import com.brain.bim.barinbim.model.ui.UiToolbarItem;
+import com.brain.bim.barinbim.model.gui.UiToolbarItem;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;

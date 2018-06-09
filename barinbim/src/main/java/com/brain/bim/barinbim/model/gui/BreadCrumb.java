@@ -1,4 +1,4 @@
-package com.brain.bim.barinbim.model.ui;
+package com.brain.bim.barinbim.model.gui;
 
 /**
  * a class to hold BreadCrumb data to show in each page

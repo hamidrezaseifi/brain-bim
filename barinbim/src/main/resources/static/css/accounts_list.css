@@ -24,9 +24,25 @@ table.accounts-list thead tr th.address
 	width: 24%;
 }
 
-table.accounts-list thead tr th.action
+table.accounts-list thead tr th.row-index
 {
-	width: 40px;
+	width: 50px;
+}
+
+table.accounts-list thead tr th.action, table.accounts-list tbody tr td.action
+{
+	width: 90px;
+}
+
+table.accounts-list tbody tr td.action i.material-icons
+{
+	font-size: 20px !important;
+}
+
+table.accounts-list tbody tr td.action button.toolbar-button-small, 
+table.accounts-list tbody tr td.action button.action-button-small
+{
+	width: 20px !important;
 }
 
 table.accounts-list tbody tr

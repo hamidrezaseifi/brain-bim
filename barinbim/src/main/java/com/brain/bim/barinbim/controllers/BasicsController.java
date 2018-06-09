@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.brain.bim.barinbim.bl.AccountsHandler;
 import com.brain.bim.barinbim.controllers.base.UiControllerBase;
 import com.brain.bim.barinbim.exceptions.UiRestResponse;
+import com.brain.bim.barinbim.helper.MessagesHelper;
+import com.brain.bim.barinbim.helper.TableColumnSettingsCreator;
 import com.brain.bim.barinbim.helper.UiToolbarManager;
 import com.brain.bim.barinbim.model.AccountModel;
-import com.brain.bim.barinbim.model.ui.UiToolbarItem;
+import com.brain.bim.barinbim.model.gui.UiToolbarItem;
+import com.brain.bim.barinbim.model.query.AccountQueryModel;
+import com.brain.bim.barinbim.model.ui.AccountModelUi;
 
 @Controller
 @RequestMapping(path = "/basics")
@@ -34,6 +38,9 @@ public class BasicsController extends UiControllerBase{
   @Autowired
   private UiToolbarManager toolbarManager;
   
+  @Autowired
+  private MessagesHelper messagesHelper;
+
   @GetMapping("/")
   public String index(final Model model) {
     //logger.debug("test");
@@ -46,6 +53,8 @@ public class BasicsController extends UiControllerBase{
   public String showList(final Model model) {
     logger.debug("show accounts list page");
 
+    model.addAttribute("tableColumns", TableColumnSettingsCreator.createAccountTableColumnSettings(messagesHelper));
+    
     return "accounts/accounts_list";
   }
   
@@ -59,13 +68,14 @@ public class BasicsController extends UiControllerBase{
     return "accounts/accounts_update";
   }
   
-  @RequestMapping(value = "/accounts/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody UiRestResponse getList() {
+  @RequestMapping(value = "/accounts/search", method = RequestMethod.POST, 
+      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody UiRestResponse searchAccounts(AccountQueryModel query) {
     logger.debug("get accounts list");
 
     List<AccountModel> list = accountsHandler.listAccount(2500);
     
-    return UiRestResponse.createDataResponse(list);
+    return UiRestResponse.createDataResponse(AccountModelUi.createFromDataModelList(list, messagesHelper));
   }  
 
   

@@ -1,4 +1,4 @@
-package com.brain.bim.barinbim.model.ui;
+package com.brain.bim.barinbim.model.gui;
 
 import java.util.ArrayList;
 import java.util.List;

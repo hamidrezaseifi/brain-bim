@@ -1,6 +1,6 @@
 
 
-var brainApp = angular.module('brainApp', ['ngMaterial', 'ngTable', 'ngMaterialAccordion']);
+var brainApp = angular.module('brainApp', ['ngMaterial', 'ngTable', 'ngMaterialAccordion', 'ngSanitize']);
 
 brainApp.config(function($mdDateLocaleProvider) {
 

@@ -26,13 +26,13 @@
 						</th>
 						
 						
-						<th title="" ng-repeat="tblColumn in tableSettings.columns" ng-if="tblColumn.show" 
+						<th title="" ng-repeat="(columnId, tblColumn) in tableSettings.columns" ng-if="tblColumn.show" 
 						class="header" role="button"
 						ng-class="{
                     'sortable': tblColumn.sortable,
                     'sort-asc': params.sorting()[tblColumn.sortable]=='asc',
                     'sort-desc': params.sorting()[tblColumn.sortable]=='desc'
-                  }" ng-click="tblColumn.sortable && sortColumn(tblColumn, $event)" >
+                  }" ng-click="tblColumn.sortable && sortColumn(tblColumn, $event)" ng-style="tblColumn.style" >
 							<div class="ng-table-header ng-scope" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'div'}">
 						    	<span ng-class="{'sort-indicator': params.settings().sortingIndicator == 'span'}" class="ng-binding sort-indicator">{{tblColumn.title}}</span>
 						    </div>
@@ -47,11 +47,11 @@
 					        
 						</th>				
 
-						<th ng-repeat="tblColumn in tableSettings.columns" ng-if="tblColumn.show" class="filter " 
-							ng-class="params.settings().filterOptions.filterLayout === 'horizontal' ? 'filter-horizontal' : ''">
-						        <div ng-repeat="(name, filter) in tblColumn.filter" 
-						        	class="filter-cell ng-scope s12 last" ng-class="[getFilterCellCss($column.filter(this), params.settings().filterOptions.filterLayout), $last ? 'last' : '']">
-						        		<input type="text" name="{{tblColumn.id}}" ng-model="params.filter()[name]" class="input-filter form-control ng-pristine ng-valid ng-scope ng-empty ng-touched" placeholder="" aria-invalid="false" style="">
+						<th ng-repeat="(columnId, tblColumn) in tableSettings.columns" ng-if="tblColumn.show" class="filter " 
+							ng-class="params.settings().filterOptions.filterLayout === 'horizontal' ? 'filter-horizontal' : ''" ng-style="tblColumn.style">
+						        <div ng-if="tblColumn.filter" 
+						        	class="filter-cell ng-scope s12 last">
+						        		<input type="text" name="{{tblColumn.id}}" ng-model="params.filter()[tblColumn.id]" class="input-filter form-control ng-pristine ng-valid ng-scope ng-empty ng-touched" placeholder="" aria-invalid="false" style="">
 					        			<span class="clear-filter ng-scope" ng-click="clearFilter($event, this)" role="button" tabindex="0"><i class="material-icons">clear</i>
 					        			</span>
 								</div>
@@ -71,8 +71,8 @@
 				            </div>
 				        </td>
 				               
-				        <td ng-repeat="tblColumn in tableSettings.columns" title="{{tblColumn.title}}" ng-style="tblColumn.style" ng-if="tblColumn.show">
-				        	<div class="general-detail" ng-bind-html="tblColumn.writeFunction(account, tblColumn.id)">
+				        <td ng-repeat="(columnId, tblColumn) in tableSettings.columns" title="{{tblColumn.title}}" ng-style="tblColumn.style" >
+				        	<div class="general-detail" ng-bind-html="tblColumn.writeFunction(account)">
 				            
 							</div>
 				        </td>
@@ -108,7 +108,7 @@
 		<script th:inline="javascript">
 		var serverConnectionError = [[#{error.serverconnectionerror}]];
 		
-		var tableSettings = /*[[${tableSettings}]]*/ [];
+		var tableColumns = /*[[${tableColumns}]]*/ [];
 
 		</script>
 

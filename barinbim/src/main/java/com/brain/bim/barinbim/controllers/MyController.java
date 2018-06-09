@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.brain.bim.barinbim.controllers.base.UiControllerBase;
 import com.brain.bim.barinbim.helper.UiToolbarManager;
-import com.brain.bim.barinbim.model.ui.UiToolbarItem;
+import com.brain.bim.barinbim.model.gui.UiToolbarItem;
 
 @Controller
 @RequestMapping(path = "/my")
