@@ -80,15 +80,15 @@
 				        <td sortable="false" class="action">
 	
 			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.view}"  
-			    			ng-click="showRecordDetails(account, $event)">
+			    			href="/basics/accounts/view/{{account.id}}">
 								<i class="material-icons">details</i>
 							</md-button>
 			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.edit}" 
-			    			ng-click="editRecord(account, $event)" ng-if="true">
+			    			href="/basics/accounts/update/{{account.id}}" ng-if="true">
 								<i class="material-icons">edit</i>
 							</md-button>
 			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.delete}" 
-			    			ng-click="editRecord(account, $event)" ng-if="true">
+			    			href="/basics/accounts/delete/{{account.id}}" ng-if="true">
 								<i class="material-icons">delete</i>
 							</md-button>
 							

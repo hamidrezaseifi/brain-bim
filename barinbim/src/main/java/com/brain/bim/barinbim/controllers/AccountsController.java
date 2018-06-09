@@ -55,7 +55,7 @@ public class AccountsController extends UiControllerBase{
     logger.debug("show accounts update page");
 
     model.addAttribute("id", accountid);
-    model.addAttribute("acc", accountsHandler.readAccount(accountid));
+    model.addAttribute("acc", AccountModelUi.createFromDataModel(accountsHandler.readAccount(accountid), messagesHelper));
     
     return "accounts/accounts_view";
   }
@@ -65,9 +65,19 @@ public class AccountsController extends UiControllerBase{
     logger.debug("show accounts update page");
 
     model.addAttribute("id", accountid);
-    model.addAttribute("acc", accountsHandler.readAccount(accountid));
+    model.addAttribute("acc", AccountModelUi.createFromDataModel(accountsHandler.readAccount(accountid), messagesHelper));
     
     return "accounts/accounts_update";
+  }
+  
+  @GetMapping("/delete/{accountid}")
+  public String showDelete(final Model model, @PathVariable long accountid) {
+    logger.debug("show accounts update page");
+
+    model.addAttribute("id", accountid);
+    model.addAttribute("acc", accountsHandler.readAccount(accountid));
+    
+    return "accounts/accounts_delete";
   }
   
   @RequestMapping(value = "/search", method = RequestMethod.POST, 

@@ -45,6 +45,16 @@ table.accounts-list tbody tr td.action button.action-button-small
 	width: 20px !important;
 }
 
+table.accounts-list tbody tr td.action a.toolbar-button-small, 
+table.accounts-list tbody tr td.action a.action-button-small
+{
+	width: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 20px !important;
+    min-height: 22px !important;
+}
+
 table.accounts-list tbody tr
 {
 	background-color: #e3e7f4;

@@ -53,9 +53,10 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 		doChangeTableSettings();
 	};
 
-	$scope.sortColumn = function(tblColumn, ev){
+	$scope.sortColumn = function(columnSort, ev){
 		
-		
+		var sortType = $scope.accountsTable.sorting()[columnSort.sortable] == "asc" ? "desc" : "asc";
+		$scope.accountsTable.sorting(columnSort.sortable, sortType);
 	}
 	
 /*
@@ -81,7 +82,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	function createTable() {
 	      var initialParams = {
 	    		  page :1, count: $scope.tableSettings.pagination ? $scope.tableSettings.pageSize : $scope.dataList.length + 1, 
-	    				  sorting: { "name": "asc",  } 
+	    				  sorting: { "accountName": "asc",  } 
 	      };
 	      var initialSettings = {
 	    		  total: $scope.dataList.length,

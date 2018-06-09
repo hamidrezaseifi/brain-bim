@@ -1,6 +1,7 @@
 package com.brain.bim.barinbim.model.ui;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,13 @@ public class AccountModelUi {
   
   public void setStatus(int status) {
     this.status = status;
-}
+  }
+
+  public String getCreatedString() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.mm.yyyy");
+    
+    return created.format(formatter);
+  }
 
   public LocalDateTime getCreated() {
     return created;
