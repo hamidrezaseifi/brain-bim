@@ -47,35 +47,6 @@ public class BasicsController extends UiControllerBase{
 
     
     return "basics/basics_index";
-  }
-  
-  @GetMapping("/accounts/index")
-  public String showList(final Model model) {
-    logger.debug("show accounts list page");
-
-    model.addAttribute("tableColumns", TableColumnSettingsCreator.createAccountTableColumnSettings(messagesHelper));
-    
-    return "accounts/accounts_list";
-  }
-  
-  @GetMapping("/accounts/update/{accountid}")
-  public String showUpdate(final Model model, @PathVariable long accountid) {
-    logger.debug("show accounts update page");
-
-    model.addAttribute("id", accountid);
-    model.addAttribute("acc", accountsHandler.readAccount(accountid));
-    
-    return "accounts/accounts_update";
-  }
-  
-  @RequestMapping(value = "/accounts/search", method = RequestMethod.POST, 
-      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody UiRestResponse searchAccounts(AccountQueryModel query) {
-    logger.debug("get accounts list");
-
-    List<AccountModel> list = accountsHandler.listAccount(2500);
-    
-    return UiRestResponse.createDataResponse(AccountModelUi.createFromDataModelList(list, messagesHelper));
   }  
 
   
