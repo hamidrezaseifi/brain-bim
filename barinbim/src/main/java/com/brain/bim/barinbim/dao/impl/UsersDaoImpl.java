@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.brain.bim.barinbim.dao.AccountsDao;
+import com.brain.bim.barinbim.dao.CompaniesDao;
 import com.brain.bim.barinbim.dao.UsersDao;
 import com.brain.bim.barinbim.model.UserModel;
 
@@ -24,16 +24,16 @@ public class UsersDaoImpl implements UsersDao {
   
   private final Logger logger = LoggerFactory.getLogger(UsersDaoImpl.class);
 
-  private final AccountsDao                 accountsDao;
+  private final CompaniesDao                 companiesDao;
   private final JdbcTemplate                jdbcTemplate;
   private final PlatformTransactionManager  platformTransactionManager;
 
 
   @Autowired
-  public UsersDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager, AccountsDao accountsDao) {
+  public UsersDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager, CompaniesDao companiesDao) {
     this.jdbcTemplate = jdbcTemplate;
     this.platformTransactionManager = platformTransactionManager;
-    this.accountsDao = accountsDao;
+    this.companiesDao = companiesDao;
   }
 
   @Override
@@ -75,7 +75,7 @@ public class UsersDaoImpl implements UsersDao {
 
   private List<UserModel> queryForUsers(final int maxCount) {
     
-    final String sql = " select id, account, username, hash_password, version, status, created, updated from tblusers limit ? ";
+    final String sql = " select id, company, username, hash_password, version, status, created, updated from tblusers limit ? ";
     
     List<UserModel> list = jdbcTemplate.query(sql, new Object[]{maxCount}, new RowMapper<UserModel>(){
 
@@ -96,7 +96,7 @@ public class UsersDaoImpl implements UsersDao {
     UserModel umodel = new UserModel();
 
     umodel.setId(rs.getLong("id"));
-    umodel.setAccount(accountsDao.readAccount(rs.getLong("account")));
+    umodel.setCompany(companiesDao.readCompany(rs.getLong("company")));
     umodel.setUserName(rs.getString("username"));
     umodel.setHashPassword(rs.getString("hash_password"));
     umodel.setVersion(rs.getInt("version"));

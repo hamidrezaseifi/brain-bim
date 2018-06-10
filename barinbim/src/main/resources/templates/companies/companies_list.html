@@ -3,20 +3,20 @@
     
     	<th:block th:include="layout/mainLayout :: pageheader" />
     	
-		<script th:src="@{/js/account_list.js}"></script>
-        <link th:href="@{/css/accounts_list.css}" rel="stylesheet" />
+		<script th:src="@{/js/companies_list.js}"></script>
+        <link th:href="@{/css/companies_list.css}" rel="stylesheet" />
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
        	<div th:replace="layout/mainLayout :: leftToolbar" ></div>
 
-		<div class="floatLeft page-content" ng-controller="AccountListController" >
-			<div class="page-conent-title"  th:text="#{accounts.accounts-list}"></div>
+		<div class="floatLeft page-content" ng-controller="CompanyListController" >
+			<div class="page-conent-title"  th:text="#{companies.companies-list}"></div>
 			
-    		<div ng-table-pagination="accountsTable" class="top-pagination" template-url="'ng-table/pager.html'"></div>
+    		<div ng-table-pagination="companiesTable" class="top-pagination" template-url="'ng-table/pager.html'"></div>
 
-			<table ng-table="accountsTable" class="table accounts-list" show-filter="true" >
+			<table ng-table="companiesTable" class="table companies-list" show-filter="true" >
 			    
 				
 				<thead class="ng-scope">
@@ -64,15 +64,15 @@
 				</thead>
 			    
 			    <tbody>
-				    <tr ng-repeat="account in $data" ng-class="">
+				    <tr ng-repeat="company in $data" ng-class="">
 				        <td>
 				        	<div class="general-detail">
-				            {{$index + 1 + ((accountsTable.page() - 1) * accountsTable.count())}}
+				            {{$index + 1 + ((companiesTable.page() - 1) * companiesTable.count())}}
 				            </div>
 				        </td>
 				               
 				        <td ng-repeat="(columnId, tblColumn) in tableSettings.columns" title="{{tblColumn.title}}" ng-style="tblColumn.style" >
-				        	<div class="general-detail" ng-bind-html="tblColumn.writeFunction(account)">
+				        	<div class="general-detail" ng-bind-html="tblColumn.writeFunction(company)">
 				            
 							</div>
 				        </td>
@@ -80,15 +80,15 @@
 				        <td sortable="false" class="action">
 	
 			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.view}"  
-			    			href="/basics/accounts/view/{{account.id}}">
+			    			href="/basics/companies/view/{{company.id}}">
 								<i class="material-icons">details</i>
 							</md-button>
 			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.edit}" 
-			    			href="/basics/accounts/update/{{account.id}}" ng-if="true">
+			    			href="/basics/companies/update/{{company.id}}" ng-if="true">
 								<i class="material-icons">edit</i>
 							</md-button>
 			    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" th:title="#{common.delete}" 
-			    			href="/basics/accounts/delete/{{account.id}}" ng-if="true">
+			    			href="/basics/companies/delete/{{company.id}}" ng-if="true">
 								<i class="material-icons">delete</i>
 							</md-button>
 							

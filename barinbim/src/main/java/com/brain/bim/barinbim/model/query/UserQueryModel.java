@@ -1,4 +1,4 @@
-package com.brain.bim.barinbim.model;
+package com.brain.bim.barinbim.model.query;
 
 
 public class UserQueryModel {

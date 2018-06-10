@@ -40,7 +40,8 @@ body.overdialog
 
 .bimnavbar
 {
-	border: none!important;	
+	border: none !important;	
+	border-radius: 0 !important;
 }
 
 button.navbar-user-dropdown
@@ -50,7 +51,7 @@ button.navbar-user-dropdown
 
 .bimnavbar ul.nav.navbar-nav 
 {
-	margin-left: 50px;
+	margin-left: 10px;
 }
 
 .bimnavbar ul.nav.navbar-nav li:hover 
@@ -67,7 +68,8 @@ button.navbar-user-dropdown
 
 .logo
 {
-	height: 30px;
+	height: 45px;
+	margin-top: 10px;
 }
 
 .loading

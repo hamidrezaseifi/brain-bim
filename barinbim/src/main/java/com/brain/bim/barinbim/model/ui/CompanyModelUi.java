@@ -9,21 +9,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.brain.bim.barinbim.helper.MessagesHelper;
-import com.brain.bim.barinbim.model.AccountModel;
+import com.brain.bim.barinbim.model.AddressModel;
+import com.brain.bim.barinbim.model.CompanyModel;
+import com.brain.bim.barinbim.model.EmailModel;
+import com.brain.bim.barinbim.model.TelephoneModel;
 
 @Component
-public class AccountModelUi {
+public class CompanyModelUi {
   private Long id;
-  private String accountName;
+  private String companyName;
   private String comments;
   private int version;
   private int status;
   private LocalDateTime  created;
   private LocalDateTime  updated;
     
+  
+  private List<AddressModel> addresses = new ArrayList<>();
+  private List<TelephoneModel> telephoneNumbers = new ArrayList<>();
+  private List<EmailModel> emails = new ArrayList<>();
+
   private MessagesHelper messagesHelper;
   
-  public AccountModelUi(MessagesHelper messagesHelper) {
+  public CompanyModelUi(MessagesHelper messagesHelper) {
     this.messagesHelper = messagesHelper;
   }
   
@@ -37,13 +45,13 @@ public class AccountModelUi {
   }
 
   
-  public String getAccountName() {
-    return accountName;
+  public String getCompanyName() {
+    return companyName;
   }
 
   
-  public void setAccountName(String name) {
-    this.accountName = name;
+  public void setCompanyName(String name) {
+    this.companyName = name;
   }
 
   
@@ -114,26 +122,63 @@ public class AccountModelUi {
     this.updated = updated;
   } 
   
-  public static AccountModelUi createFromDataModel(AccountModel dataModel, MessagesHelper messagesHelper) {
+  public List<AddressModel> getAddresses() {
+    return addresses;
+  }
+
+
+  
+  public void setAddresses(List<AddressModel> addresses) {
+    this.addresses = addresses;
+  }
+
+
+  
+  public List<TelephoneModel> getTelephoneNumbers() {
+    return telephoneNumbers;
+  }
+
+
+  
+  public void setTelephoneNumbers(List<TelephoneModel> telephoneNumbers) {
+    this.telephoneNumbers = telephoneNumbers;
+  }
+
+
+  
+  public List<EmailModel> getEmails() {
+    return emails;
+  }
+
+
+  
+  public void setEmails(List<EmailModel> emails) {
+    this.emails = emails;
+  } 
+
+  public static CompanyModelUi createFromDataModel(CompanyModel dataModel, MessagesHelper messagesHelper) {
     
-    AccountModelUi model = new AccountModelUi(messagesHelper);
-    model.setAccountName(dataModel.getAccountName());
+    CompanyModelUi model = new CompanyModelUi(messagesHelper);
+    model.setCompanyName(dataModel.getCompanyName());
     model.setComments(dataModel.getComments());
     model.setCreated(dataModel.getCreated());
     model.setId(dataModel.getId());
     model.setStatus(dataModel.getStatus());
     model.setUpdated(dataModel.getUpdated());
     model.setVersion(dataModel.getVersion());
+    model.setAddresses(dataModel.getAddresses());
+    model.setTelephoneNumbers(dataModel.getTelephoneNumbers());
+    model.setEmails(dataModel.getEmails());
     
     return model;
   }
   
-  public static List<AccountModelUi> createFromDataModelList(List<AccountModel> dataModelList, MessagesHelper messagesHelper) {
+  public static List<CompanyModelUi> createFromDataModelList(List<CompanyModel> dataModelList, MessagesHelper messagesHelper) {
     
-    List<AccountModelUi> list = new ArrayList<>();
+    List<CompanyModelUi> list = new ArrayList<>();
     
-    for(AccountModel dataModel : dataModelList) {
-      list.add(AccountModelUi.createFromDataModel(dataModel, messagesHelper));
+    for(CompanyModel dataModel : dataModelList) {
+      list.add(CompanyModelUi.createFromDataModel(dataModel, messagesHelper));
     }
     
     return list;

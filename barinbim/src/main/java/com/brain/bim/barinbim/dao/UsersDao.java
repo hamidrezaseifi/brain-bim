@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.brain.bim.barinbim.model.UserModel;
-import com.brain.bim.barinbim.model.UserQueryModel;
+import com.brain.bim.barinbim.model.query.UserQueryModel;
 
 
 public interface UsersDao {

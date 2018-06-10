@@ -1,13 +1,13 @@
 @charset "ISO-8859-1";
 
-table.accounts-list
+table.companies-list
 {
 	width: 100% ;
 	border: 1px solid gray;
 	border-spacing: 0px 5px;
 }
 
-table.accounts-list thead tr th
+table.companies-list thead tr th
 {
 	background-color: #dfdfdf;
 	color: #000071;
@@ -18,35 +18,35 @@ table.accounts-list thead tr th
 	text-align: center;
 }
 
-table.accounts-list thead tr th.address
- , table.accounts-list thead tr th.email , table.accounts-list thead tr th.tel
+table.companies-list thead tr th.address
+ , table.companies-list thead tr th.email , table.companies-list thead tr th.tel
 {
 	width: 24%;
 }
 
-table.accounts-list thead tr th.row-index
+table.companies-list thead tr th.row-index
 {
 	width: 50px;
 }
 
-table.accounts-list thead tr th.action, table.accounts-list tbody tr td.action
+table.companies-list thead tr th.action, table.companies-list tbody tr td.action
 {
 	width: 90px;
 }
 
-table.accounts-list tbody tr td.action i.material-icons
+table.companies-list tbody tr td.action i.material-icons
 {
 	font-size: 20px !important;
 }
 
-table.accounts-list tbody tr td.action button.toolbar-button-small, 
-table.accounts-list tbody tr td.action button.action-button-small
+table.companies-list tbody tr td.action button.toolbar-button-small, 
+table.companies-list tbody tr td.action button.action-button-small
 {
 	width: 20px !important;
 }
 
-table.accounts-list tbody tr td.action a.toolbar-button-small, 
-table.accounts-list tbody tr td.action a.action-button-small
+table.companies-list tbody tr td.action a.toolbar-button-small, 
+table.companies-list tbody tr td.action a.action-button-small
 {
 	width: 20px !important;
     margin: 0 !important;
@@ -55,13 +55,13 @@ table.accounts-list tbody tr td.action a.action-button-small
     min-height: 22px !important;
 }
 
-table.accounts-list tbody tr
+table.companies-list tbody tr
 {
 	background-color: #e3e7f4;
 }
 
 
-table.accounts-list tbody tr.nodata
+table.companies-list tbody tr.nodata
 {
 	background-color: #e3e7f4;
 }

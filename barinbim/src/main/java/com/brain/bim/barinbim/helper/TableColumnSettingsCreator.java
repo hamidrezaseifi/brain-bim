@@ -7,19 +7,19 @@ import com.brain.bim.barinbim.model.gui.TableColumnSettings;
 
 public class TableColumnSettingsCreator {
   
-  public static Map<String, TableColumnSettings> createAccountTableColumnSettings(MessagesHelper messagesHelper){
+  public static Map<String, TableColumnSettings> createCompanyTableColumnSettings(MessagesHelper messagesHelper){
     
     Map<String, TableColumnSettings> settings = new HashMap<String, TableColumnSettings>();
 
 
-    settings.put("accountName", new TableColumnSettings("accountName", messagesHelper.get("accounts.accountName"), "accountName", "accountName"));
+    settings.put("companyName", new TableColumnSettings("companyName", messagesHelper.get("companies.companyName"), "companyName", "companyName"));
     
     Map<String, String> style = new HashMap<String, String>();
     style.put("width", "100px");
-    settings.put("statusLabel", new TableColumnSettings("statusLabel", messagesHelper.get("accounts.status"), "statusLabel", "statusLabel", style));
+    settings.put("statusLabel", new TableColumnSettings("statusLabel", messagesHelper.get("companies.status"), "statusLabel", "statusLabel", style));
 
     style.put("width", "140px");
-    settings.put("created", new TableColumnSettings("created", messagesHelper.get("accounts.created"), "created", "created", style));
+    settings.put("created", new TableColumnSettings("created", messagesHelper.get("companies.created"), "created", "created", style));
 
     return settings;
     

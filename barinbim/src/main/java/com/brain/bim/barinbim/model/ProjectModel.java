@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class ProjectModel {
   private Long id;
-  private AccountModel account;
+  private CompanyModel account;
   private String projectName;
   private int version;
   private int status;
@@ -21,12 +21,12 @@ public class ProjectModel {
   }
   
   
-  public AccountModel getAccount() {
+  public CompanyModel getAccount() {
     return account;
   }
 
   
-  public void setAccount(AccountModel account) {
+  public void setAccount(CompanyModel account) {
     this.account = account;
   }
 

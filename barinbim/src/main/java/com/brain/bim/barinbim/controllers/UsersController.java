@@ -15,8 +15,8 @@ import com.brain.bim.barinbim.bl.UsersHandler;
 import com.brain.bim.barinbim.controllers.base.UiControllerBase;
 import com.brain.bim.barinbim.helper.UiToolbarManager;
 import com.brain.bim.barinbim.model.UserModel;
-import com.brain.bim.barinbim.model.UserQueryModel;
 import com.brain.bim.barinbim.model.gui.UiToolbarItem;
+import com.brain.bim.barinbim.model.query.UserQueryModel;
 
 
 @RestController

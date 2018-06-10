@@ -2,7 +2,7 @@ package com.brain.bim.barinbim.model.query;
 
 import java.time.LocalDateTime;
 
-public class AccountQueryModel {
+public class CompanyQueryModel {
 
   private String accountName;
   private int status;

@@ -12,14 +12,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.brain.bim.barinbim.dao.AccountsDao;
-import com.brain.bim.barinbim.model.AccountModel;
+import com.brain.bim.barinbim.dao.CompaniesDao;
+import com.brain.bim.barinbim.model.CompanyModel;
 import com.brain.bim.barinbim.model.UserModel;
-import com.brain.bim.barinbim.model.AccountModel;
+import com.brain.bim.barinbim.model.CompanyModel;
 
 
 @Repository
-public class AccountsDaoImpl implements AccountsDao {
+public class CompaniesDaoImpl implements CompaniesDao {
   
   private final Logger logger = LoggerFactory.getLogger(UsersDaoImpl.class);
 
@@ -28,7 +28,7 @@ public class AccountsDaoImpl implements AccountsDao {
 
   
   @Autowired
-  public AccountsDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager) {
+  public CompaniesDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager) {
     this.jdbcTemplate = jdbcTemplate;
     this.platformTransactionManager = platformTransactionManager;
   }
@@ -36,50 +36,50 @@ public class AccountsDaoImpl implements AccountsDao {
   
   
   @Override
-  public Long createAccount(AccountModel account) {
+  public Long createCompany(CompanyModel company) {
     // TODO Auto-generated method stub
     return null;
   }
   
   @Override
-  public AccountModel createAndReadAccount(AccountModel account) {
+  public CompanyModel createAndReadCompany(CompanyModel company) {
     // TODO Auto-generated method stub
     return null;
   }
   
   @Override
-  public AccountModel readAccount(final Long id) {
+  public CompanyModel readCompany(final Long id) {
     // TODO Auto-generated method stub
-    return queryForAccountRead(id);
+    return queryForCompanyRead(id);
   }
   
   @Override
-  public AccountModel updateAccount(AccountModel account) {
+  public CompanyModel updateCompany(CompanyModel company) {
     // TODO Auto-generated method stub
     return null;
   }
   
   @Override
-  public void deleteAccount(AccountModel account) {
+  public void deleteCompany(CompanyModel company) {
     // TODO Auto-generated method stub
     
   }
   
   @Override
-  public List<AccountModel> listAccounts(final int maxCount) {
+  public List<CompanyModel> listCompanies(final int maxCount) {
     // TODO Auto-generated method stub
-    return queryForAccounts(maxCount);
+    return queryForCompanies(maxCount);
   }
   
-  private AccountModel queryForAccountRead(final Long id) {
+  private CompanyModel queryForCompanyRead(final Long id) {
     
-    final String sql = " select id, account_name, comments, status, version, created, updated from tblaccounts where id = ? ";
+    final String sql = " select id, company_name, comments, status, version, created, updated from tblcompanies where id = ? ";
     
-    List<AccountModel> list = jdbcTemplate.query(sql, new Object[]{id}, new RowMapper<AccountModel>(){
+    List<CompanyModel> list = jdbcTemplate.query(sql, new Object[]{id}, new RowMapper<CompanyModel>(){
 
       @Override
-      public AccountModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return createAccountFromResultSet(rs);
+      public CompanyModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return createCompanyFromResultSet(rs);
       }
       
     });
@@ -88,15 +88,15 @@ public class AccountsDaoImpl implements AccountsDao {
     
   }  
 
-  private List<AccountModel> queryForAccounts(final int maxCount) {
+  private List<CompanyModel> queryForCompanies(final int maxCount) {
     
-    final String sql = " select id, account_name, comments, status, version, created, updated from tblaccounts limit ? ";
+    final String sql = " select id, company_name, comments, status, version, created, updated from tblcompanies limit ? ";
     
-    List<AccountModel> list = jdbcTemplate.query(sql, new Object[]{maxCount}, new RowMapper<AccountModel>(){
+    List<CompanyModel> list = jdbcTemplate.query(sql, new Object[]{maxCount}, new RowMapper<CompanyModel>(){
 
       @Override
-      public AccountModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return createAccountFromResultSet(rs);
+      public CompanyModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return createCompanyFromResultSet(rs);
       }
       
     });
@@ -105,12 +105,12 @@ public class AccountsDaoImpl implements AccountsDao {
     
   }  
 
-  private AccountModel createAccountFromResultSet(ResultSet rs) throws SQLException {
+  private CompanyModel createCompanyFromResultSet(ResultSet rs) throws SQLException {
       
-    AccountModel umodel = new AccountModel();
+    CompanyModel umodel = new CompanyModel();
   
     umodel.setId(rs.getLong("id"));
-    umodel.setAccountName(rs.getString("account_name"));
+    umodel.setCompanyName(rs.getString("company_name"));
     umodel.setComments(rs.getString("comments"));
     umodel.setVersion(rs.getInt("version"));
     umodel.setStatus(rs.getInt("status"));

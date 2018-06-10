@@ -15,25 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.brain.bim.barinbim.bl.AccountsHandler;
+import com.brain.bim.barinbim.bl.CompaniesHandler;
 import com.brain.bim.barinbim.controllers.base.UiControllerBase;
 import com.brain.bim.barinbim.exceptions.UiRestResponse;
 import com.brain.bim.barinbim.helper.MessagesHelper;
 import com.brain.bim.barinbim.helper.TableColumnSettingsCreator;
 import com.brain.bim.barinbim.helper.UiToolbarManager;
-import com.brain.bim.barinbim.model.AccountModel;
+import com.brain.bim.barinbim.model.CompanyModel;
 import com.brain.bim.barinbim.model.gui.UiToolbarItem;
-import com.brain.bim.barinbim.model.query.AccountQueryModel;
-import com.brain.bim.barinbim.model.ui.AccountModelUi;
+import com.brain.bim.barinbim.model.query.CompanyQueryModel;
+import com.brain.bim.barinbim.model.ui.CompanyModelUi;
 
 @Controller
-@RequestMapping(path = "/basics/accounts")
-public class AccountsController extends UiControllerBase{
+@RequestMapping(path = "/basics/companies")
+public class CompanieController extends UiControllerBase{
 
-  private final Logger logger = LoggerFactory.getLogger(AccountsController.class);
+  private final Logger logger = LoggerFactory.getLogger(CompanieController.class);
   
   @Autowired
-  private AccountsHandler accountsHandler;
+  private CompaniesHandler companiesHandler;
 
   @Autowired
   private UiToolbarManager toolbarManager;
@@ -45,9 +45,9 @@ public class AccountsController extends UiControllerBase{
   public String showList(final Model model) {
     logger.debug("show accounts list page");
 
-    model.addAttribute("tableColumns", TableColumnSettingsCreator.createAccountTableColumnSettings(messagesHelper));
+    model.addAttribute("tableColumns", TableColumnSettingsCreator.createCompanyTableColumnSettings(messagesHelper));
     
-    return "accounts/accounts_list";
+    return "companies/companies_list";
   }
   
   @GetMapping("/view/{accountid}")
@@ -55,9 +55,9 @@ public class AccountsController extends UiControllerBase{
     logger.debug("show accounts update page");
 
     model.addAttribute("id", accountid);
-    model.addAttribute("acc", AccountModelUi.createFromDataModel(accountsHandler.readAccount(accountid), messagesHelper));
+    model.addAttribute("acc", CompanyModelUi.createFromDataModel(companiesHandler.readCompany(accountid), messagesHelper));
     
-    return "accounts/accounts_view";
+    return "companies/companies_view";
   }
   
   @GetMapping("/update/{accountid}")
@@ -65,29 +65,29 @@ public class AccountsController extends UiControllerBase{
     logger.debug("show accounts update page");
 
     model.addAttribute("id", accountid);
-    model.addAttribute("acc", AccountModelUi.createFromDataModel(accountsHandler.readAccount(accountid), messagesHelper));
+    model.addAttribute("acc", CompanyModelUi.createFromDataModel(companiesHandler.readCompany(accountid), messagesHelper));
     
-    return "accounts/accounts_update";
+    return "companies/companies_update";
   }
   
-  @GetMapping("/delete/{accountid}")
-  public String showDelete(final Model model, @PathVariable long accountid) {
+  @GetMapping("/delete/{companyid}")
+  public String showDelete(final Model model, @PathVariable long companyid) {
     logger.debug("show accounts update page");
 
-    model.addAttribute("id", accountid);
-    model.addAttribute("acc", accountsHandler.readAccount(accountid));
+    model.addAttribute("id", companyid);
+    model.addAttribute("acc", companiesHandler.readCompany(companyid));
     
-    return "accounts/accounts_delete";
+    return "companies/companies_delete";
   }
   
   @RequestMapping(value = "/search", method = RequestMethod.POST, 
       consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody UiRestResponse searchAccounts(AccountQueryModel query) {
+  public @ResponseBody UiRestResponse searchCompanys(CompanyQueryModel query) {
     logger.debug("get accounts list");
 
-    List<AccountModel> list = accountsHandler.listAccount(2500);
+    List<CompanyModel> list = companiesHandler.listCompanies(2500);
     
-    return UiRestResponse.createDataResponse(AccountModelUi.createFromDataModelList(list, messagesHelper));
+    return UiRestResponse.createDataResponse(CompanyModelUi.createFromDataModelList(list, messagesHelper));
   }  
 
   

@@ -30,7 +30,8 @@ public class MainController extends UiControllerBase{
   public String index(final Model model) {
     //logger.debug("test");
 
-    return "index";
+    return "redirect:/my/dashboard";
+    //return "index";
   }
   
   @RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

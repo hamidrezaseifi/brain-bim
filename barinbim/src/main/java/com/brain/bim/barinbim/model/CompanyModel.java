@@ -1,15 +1,21 @@
 package com.brain.bim.barinbim.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AccountModel {
+public class CompanyModel {
   private Long id;
-  private String accountName;
+  private String companyName;
   private String comments;
   private int version;
   private int status;
   private LocalDateTime  created;
   private LocalDateTime  updated;
+  
+  private List<AddressModel> addresses = new ArrayList<>();
+  private List<TelephoneModel> telephoneNumbers = new ArrayList<>();
+  private List<EmailModel> emails = new ArrayList<>();
   
   public Long getId() {
     return id;
@@ -21,13 +27,13 @@ public class AccountModel {
   }
 
   
-  public String getAccountName() {
-    return accountName;
+  public String getCompanyName() {
+    return companyName;
   }
 
   
-  public void setAccountName(String name) {
-    this.accountName = name;
+  public void setCompanyName(String name) {
+    this.companyName = name;
   }
 
   
@@ -79,5 +85,41 @@ public class AccountModel {
   
   public void setUpdated(LocalDateTime updated) {
     this.updated = updated;
+  }
+
+
+  
+  public List<AddressModel> getAddresses() {
+    return addresses;
+  }
+
+
+  
+  public void setAddresses(List<AddressModel> addresses) {
+    this.addresses = addresses;
+  }
+
+
+  
+  public List<TelephoneModel> getTelephoneNumbers() {
+    return telephoneNumbers;
+  }
+
+
+  
+  public void setTelephoneNumbers(List<TelephoneModel> telephoneNumbers) {
+    this.telephoneNumbers = telephoneNumbers;
+  }
+
+
+  
+  public List<EmailModel> getEmails() {
+    return emails;
+  }
+
+
+  
+  public void setEmails(List<EmailModel> emails) {
+    this.emails = emails;
   } 
 }

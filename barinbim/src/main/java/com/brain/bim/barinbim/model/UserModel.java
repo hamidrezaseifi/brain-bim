@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class UserModel {
   
   private Long id;
-  private AccountModel account;
+  private CompanyModel company;
   private String userName;
   private String hashPassword;
   private int version;
@@ -37,13 +37,13 @@ public class UserModel {
   }
   
   
-  public AccountModel getAccount() {
-    return account;
+  public CompanyModel getCompany() {
+    return company;
   }
 
   
-  public void setAccount(AccountModel account) {
-    this.account = account;
+  public void setCompany(CompanyModel company) {
+    this.company = company;
   }
 
   public String getUserName() {

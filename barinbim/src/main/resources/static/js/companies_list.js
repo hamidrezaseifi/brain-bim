@@ -1,5 +1,5 @@
 
-brainApp.controller('AccountListController', function ($scope, $http, $sce, $element, $compile, NgTableParams, 
+brainApp.controller('CompanyListController', function ($scope, $http, $sce, $element, $compile, NgTableParams, 
 		ngTableEventsChannel, $mdSidenav, $mdDialog, $timeout, $mdComponentRegistry) {
 
 	/*
@@ -12,10 +12,10 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	$scope.maxRecordsList = [50, 100, 150, 200, 500, ];
 
 	$scope.dataList = [];
-	$scope.accountsTable = false;
+	$scope.companiesTable = false;
 		
-	tableColumns.accountName.writeFunction = function(record){ 
-		return record["accountName"]; 
+	tableColumns.companyName.writeFunction = function(record){ 
+		return record["companyName"]; 
 	};
 
 	tableColumns.statusLabel.writeFunction = function(record){ 
@@ -30,7 +30,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	$scope.tableSettings = {pagination: false, pageSize: 12, columns: tableColumns };
 	
 
-	//$scope.accountsTable = createTable();
+	//$scope.companiesTable = createTable();
 	
 	searchAccounts();
 	
@@ -55,8 +55,8 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 
 	$scope.sortColumn = function(columnSort, ev){
 		
-		var sortType = $scope.accountsTable.sorting()[columnSort.sortable] == "asc" ? "desc" : "asc";
-		$scope.accountsTable.sorting(columnSort.sortable, sortType);
+		var sortType = $scope.companiesTable.sorting()[columnSort.sortable] == "asc" ? "desc" : "asc";
+		$scope.companiesTable.sorting(columnSort.sortable, sortType);
 	}
 	
 /*
@@ -66,7 +66,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	
 	function doChangeTableSettings(){  
 		
-		var pageSize = $scope.tableSettings.pagination ? $scope.tableSettings.pageSize : $scope.accountsTable.total() + 1;
+		var pageSize = $scope.tableSettings.pagination ? $scope.tableSettings.pageSize : $scope.companiesTable.total() + 1;
 		var table = getCurrentTable();
 		
 		if(pageSize != table.count()){
@@ -82,7 +82,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 	function createTable() {
 	      var initialParams = {
 	    		  page :1, count: $scope.tableSettings.pagination ? $scope.tableSettings.pageSize : $scope.dataList.length + 1, 
-	    				  sorting: { "accountName": "asc",  } 
+	    				  sorting: { "companyName": "asc",  } 
 	      };
 	      var initialSettings = {
 	    		  total: $scope.dataList.length,
@@ -112,13 +112,13 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 		var qModel = prepareQueryModel();
 		
 		$scope.dataList = [];
-		$scope.accountsTable = createTable();		
+		$scope.companiesTable = createTable();		
 		
 		$scope.$parent.showloading = true;
 
 		$http({
 			method: "POST",
-			url: "/basics/accounts/search", 
+			url: "/basics/companies/search", 
 			headers: {
 				   "Content-Type": "application/json"
 				 },
@@ -127,7 +127,7 @@ brainApp.controller('AccountListController', function ($scope, $http, $sce, $ele
 
 			$scope.dataList = response.data.data;
 			
-			$scope.accountsTable = createTable();
+			$scope.companiesTable = createTable();
 			
 			$scope.$parent.showloading = false;
 		}, function errorCallback(response){ 
