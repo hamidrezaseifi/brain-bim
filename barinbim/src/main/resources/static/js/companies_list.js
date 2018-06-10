@@ -14,15 +14,35 @@ brainApp.controller('CompanyListController', function ($scope, $http, $sce, $ele
 	$scope.dataList = [];
 	$scope.companiesTable = false;
 		
-	tableColumns.companyName.writeFunction = function(record){ 
+	tableColumns.a.writeFunction = function(record){ 
 		return record["companyName"]; 
 	};
 
-	tableColumns.statusLabel.writeFunction = function(record){ 
+	tableColumns.b.writeFunction = function(record){ 
+		var res = "";
+		for(var idx in record.telephoneNumbers){
+			var tel = record.telephoneNumbers[idx];
+			res += tel.telephoneName + ": " + tel.countryCode + "-" + tel.cityCode + "-" + tel.subscriber + "<hr>";
+		}
+		
+		return res; 
+	};
+
+	tableColumns.c.writeFunction = function(record){ 
+		var res = "";
+		for(var idx in record.emails){
+			var email = record.emails[idx];
+			res += email.emailName + ": " + email.emailaddress + "<hr>";
+		}
+		
+		return res; 
+	};
+
+	tableColumns.d.writeFunction = function(record){ 
 		return record["statusLabel"]; 
 	};
 
-	tableColumns.created.writeFunction = function(record){ 
+	tableColumns.e.writeFunction = function(record){ 
 		var m = moment(record["created"]);
 		return m.format('DD.MM.YYYY');
 	};

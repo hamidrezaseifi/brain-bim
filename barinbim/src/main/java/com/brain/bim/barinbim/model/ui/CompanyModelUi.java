@@ -12,7 +12,7 @@ import com.brain.bim.barinbim.helper.MessagesHelper;
 import com.brain.bim.barinbim.model.AddressModel;
 import com.brain.bim.barinbim.model.CompanyModel;
 import com.brain.bim.barinbim.model.EmailModel;
-import com.brain.bim.barinbim.model.TelephoneModel;
+import com.brain.bim.barinbim.model.TelephoneNumberModel;
 
 @Component
 public class CompanyModelUi {
@@ -26,7 +26,7 @@ public class CompanyModelUi {
     
   
   private List<AddressModel> addresses = new ArrayList<>();
-  private List<TelephoneModel> telephoneNumbers = new ArrayList<>();
+  private List<TelephoneNumberModel> telephoneNumbers = new ArrayList<>();
   private List<EmailModel> emails = new ArrayList<>();
 
   private MessagesHelper messagesHelper;
@@ -134,13 +134,13 @@ public class CompanyModelUi {
 
 
   
-  public List<TelephoneModel> getTelephoneNumbers() {
+  public List<TelephoneNumberModel> getTelephoneNumbers() {
     return telephoneNumbers;
   }
 
 
   
-  public void setTelephoneNumbers(List<TelephoneModel> telephoneNumbers) {
+  public void setTelephoneNumbers(List<TelephoneNumberModel> telephoneNumbers) {
     this.telephoneNumbers = telephoneNumbers;
   }
 

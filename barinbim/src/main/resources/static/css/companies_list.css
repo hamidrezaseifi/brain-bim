@@ -18,11 +18,30 @@ table.companies-list thead tr th
 	text-align: center;
 }
 
-table.companies-list thead tr th.address
- , table.companies-list thead tr th.email , table.companies-list thead tr th.tel
+table.companies-list tbody tr td
 {
-	width: 24%;
+	background-color: transparent;
+	font-size: 14px;
+	height: 25px;
+	border: 1px solid gray;
+	text-align: center;
 }
+
+table.companies-list tbody tr:nth-child(odd)
+{
+	background-color: #f0fff1;
+}
+
+table.companies-list tbody tr:nth-child(even)
+{
+	background-color: #ffeee8;
+}
+
+table.companies-list tbody tr:hover
+{
+	background-color: #e8f0ff;
+}
+
 
 table.companies-list thead tr th.row-index
 {

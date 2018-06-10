@@ -12,9 +12,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.brain.bim.barinbim.dao.AddressesDao;
 import com.brain.bim.barinbim.dao.CompaniesDao;
+import com.brain.bim.barinbim.dao.EmailsDao;
+import com.brain.bim.barinbim.dao.TelephoneNumbersDao;
 import com.brain.bim.barinbim.model.CompanyModel;
 import com.brain.bim.barinbim.model.UserModel;
+import com.brain.bim.barinbim.model.enums.ContactOwnerType;
 import com.brain.bim.barinbim.model.CompanyModel;
 
 
@@ -26,11 +30,18 @@ public class CompaniesDaoImpl implements CompaniesDao {
   private final JdbcTemplate               jdbcTemplate;
   private final PlatformTransactionManager platformTransactionManager;
 
+  private final AddressesDao addressesDao;
+  private final TelephoneNumbersDao telephoneNumbersDao;
+  private final EmailsDao emailsDao;
   
   @Autowired
-  public CompaniesDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager) {
+  public CompaniesDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager, 
+      AddressesDao addressesDao, TelephoneNumbersDao telephoneNumbersDao, EmailsDao emailsDao) {
     this.jdbcTemplate = jdbcTemplate;
     this.platformTransactionManager = platformTransactionManager;
+    this.addressesDao = addressesDao;
+    this.telephoneNumbersDao = telephoneNumbersDao;
+    this.emailsDao = emailsDao;
   }
 
   
@@ -118,6 +129,10 @@ public class CompaniesDaoImpl implements CompaniesDao {
     umodel.setCreated(rs.getTimestamp("created").toLocalDateTime());
     umodel.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
   
+    umodel.addAddresses(addressesDao.listAddresses(umodel.getId(), ContactOwnerType.Company));
+    umodel.addTelephoneNumbers(telephoneNumbersDao.listTelephoneNumber(umodel.getId(), ContactOwnerType.Company));
+    umodel.addEmails(emailsDao.listEmails(umodel.getId(), ContactOwnerType.Company));
+    
     return umodel;
       
   }

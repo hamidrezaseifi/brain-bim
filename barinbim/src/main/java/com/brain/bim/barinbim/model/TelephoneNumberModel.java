@@ -2,7 +2,7 @@ package com.brain.bim.barinbim.model;
 
 import java.time.LocalDateTime;
 
-public class TelephoneModel {
+public class TelephoneNumberModel {
   private Long ownerId;
   private String ownerType;
   private String telephoneName;

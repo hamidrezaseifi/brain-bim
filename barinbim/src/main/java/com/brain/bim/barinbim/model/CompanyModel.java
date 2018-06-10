@@ -14,7 +14,7 @@ public class CompanyModel {
   private LocalDateTime  updated;
   
   private List<AddressModel> addresses = new ArrayList<>();
-  private List<TelephoneModel> telephoneNumbers = new ArrayList<>();
+  private List<TelephoneNumberModel> telephoneNumbers = new ArrayList<>();
   private List<EmailModel> emails = new ArrayList<>();
   
   public Long getId() {
@@ -95,19 +95,27 @@ public class CompanyModel {
 
 
   
+  public void addAddresses(List<AddressModel> addresses) {
+    this.addresses.addAll(addresses);
+  }
+
   public void setAddresses(List<AddressModel> addresses) {
     this.addresses = addresses;
   }
 
 
   
-  public List<TelephoneModel> getTelephoneNumbers() {
+  public List<TelephoneNumberModel> getTelephoneNumbers() {
     return telephoneNumbers;
   }
 
 
   
-  public void setTelephoneNumbers(List<TelephoneModel> telephoneNumbers) {
+  public void addTelephoneNumbers(List<TelephoneNumberModel> telephoneNumbers) {
+    this.telephoneNumbers.addAll(telephoneNumbers);
+  }
+
+  public void setTelephoneNumbers(List<TelephoneNumberModel> telephoneNumbers) {
     this.telephoneNumbers = telephoneNumbers;
   }
 
@@ -118,6 +126,10 @@ public class CompanyModel {
   }
 
 
+  
+  public void addEmails(List<EmailModel> emails) {
+    this.emails.addAll(emails);
+  } 
   
   public void setEmails(List<EmailModel> emails) {
     this.emails = emails;
