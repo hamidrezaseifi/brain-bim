@@ -229,4 +229,14 @@ div.data-preview:not(.no-border)
 	border-right: 1px solid gray;
 }
 
+div.address-item
+{
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+div.address-item:not(:last-child)
+{
+	border-bottom: lightgrey solid 1px;
+}
 

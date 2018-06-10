@@ -3,6 +3,7 @@
     
     	<th:block th:include="layout/mainLayout :: pageheader" />
 		<script th:src="@{/js/index.js}"></script>
+        <link th:href="@{/css/companies_list.css}" rel="stylesheet" />
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
@@ -11,30 +12,69 @@
 
 		<div class="floatLeft page-content" >
 			
-			<h1 th:text="#{accounts.accountview}"></h1>
+			<h1 th:text="#{companies.companyview}"></h1>
 			
 			<p>
-        		<a class="btn btn-primary" th:href="@{'/basics/accounts/update/' + ${id}}" th:text="#{common.edit}"></a>        
-        		<a class="btn btn-danger" th:href="@{'/basics/accounts/delete/' + ${id}}" th:text="#{common.delete}"></a>
+        		<a class="btn btn-primary" th:href="@{'/basics/companies/update/' + ${id}}" th:text="#{common.edit}"></a>        
+        		<a class="btn btn-danger" th:href="@{'/basics/companies/delete/' + ${id}}" th:text="#{common.delete}"></a>
         		    
         	</p>
         			
         	<table class="table table-striped table-bordered detail-view">
         		<tr>
-        			<th th:text="#{accounts.accountName}"></th>
-        			<td th:text="${acc.getAccountName()}"></td>
+        			<th th:text="#{companies.companyName}"></th>
+        			<td th:text="${company.getCompanyName()}"></td>
         		</tr>
         		<tr>
-        			<th th:text="#{accounts.comments}"></th>
-        			<td th:text="${acc.getComments()}"></td>
+        			<th th:text="#{companies.comments}"></th>
+        			<td th:text="${company.getComments()}"></td>
         		</tr>
         		<tr>
-        			<th th:text="#{accounts.status}"></th>
-        			<td th:text="${acc.getStatusLabel()}"></td>
+        			<th th:text="#{companies.addresses}"></th>
+        			<td style="padding: 0;">
+        				<th:block th:each="address : ${company.getAddresses()}">
+        					<div class="address-item">
+        						<span th:text="${address.getAddressName()}"></span>: 
+        						<span th:text="${address.getHouseNumber()}"></span>
+        						<span th:text="${address.getStreet()}"></span><br>
+        						<span th:text="${address.getStreet2()}"></span>
+        						<br th:if="${address.getStreet2() != null}">
+        						<span th:text="${address.getPostCode()}"></span>
+        						<span th:text="${address.getCity()}"></span>
+        						<span th:text="${address.getCountry()}"></span>
+        					</div>
+        				</th:block>
+        			</td>
         		</tr>
         		<tr>
-        			<th th:text="#{accounts.created}"></th>
-        			<td th:text="${acc.getCreatedString()}"></td>
+        			<th th:text="#{companies.telephoneNumbers}"></th>
+        			<td style="padding: 0;">
+        				<th:block th:each="tel : ${company.getTelephoneNumbers()}">
+        					<div class="address-item">
+        						<span th:text="${tel.getTelephoneName()}"></span>: 
+        						+<span th:text="${tel.getCountryCode()}"></span>-<span th:text="${tel.getCityCode()}"></span>-<span th:text="${tel.getSubscriber()}"></span>
+        					</div>
+        				</th:block>
+        			</td>
+        		</tr>
+        		<tr>
+        			<th th:text="#{companies.emails}"></th>
+        			<td style="padding: 0;">
+        				<th:block th:each="email : ${company.getEmails()}">
+        					<div class="address-item">
+        						<span th:text="${email.getEmailName()}"></span>: 
+        						<span th:text="${email.getEmailaddress()}"></span>
+        					</div>
+        				</th:block>
+        			</td>
+        		</tr>
+        		<tr>
+        			<th th:text="#{companies.status}"></th>
+        			<td th:text="${company.getStatusLabel()}"></td>
+        		</tr>
+        		<tr>
+        			<th th:text="#{companies.created}"></th>
+        			<td th:text="${company.getCreatedString()}"></td>
         		</tr>
         	</table>	
 			

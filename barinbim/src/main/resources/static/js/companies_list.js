@@ -22,7 +22,7 @@ brainApp.controller('CompanyListController', function ($scope, $http, $sce, $ele
 		var res = "";
 		for(var idx in record.telephoneNumbers){
 			var tel = record.telephoneNumbers[idx];
-			res += tel.telephoneName + ": " + tel.countryCode + "-" + tel.cityCode + "-" + tel.subscriber + "<hr>";
+			res += tel.telephoneName + ": +" + tel.countryCode + "-" + tel.cityCode + "-" + tel.subscriber + "<hr>";
 		}
 		
 		return res; 

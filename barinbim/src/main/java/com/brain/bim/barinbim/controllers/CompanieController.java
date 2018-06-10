@@ -55,7 +55,7 @@ public class CompanieController extends UiControllerBase{
     logger.debug("show accounts update page");
 
     model.addAttribute("id", accountid);
-    model.addAttribute("acc", CompanyModelUi.createFromDataModel(companiesHandler.readCompany(accountid), messagesHelper));
+    model.addAttribute("company", CompanyModelUi.createFromDataModel(companiesHandler.readCompany(accountid), messagesHelper));
     
     return "companies/companies_view";
   }
@@ -65,7 +65,7 @@ public class CompanieController extends UiControllerBase{
     logger.debug("show accounts update page");
 
     model.addAttribute("id", accountid);
-    model.addAttribute("acc", CompanyModelUi.createFromDataModel(companiesHandler.readCompany(accountid), messagesHelper));
+    model.addAttribute("company", CompanyModelUi.createFromDataModel(companiesHandler.readCompany(accountid), messagesHelper));
     
     return "companies/companies_update";
   }
@@ -75,7 +75,7 @@ public class CompanieController extends UiControllerBase{
     logger.debug("show accounts update page");
 
     model.addAttribute("id", companyid);
-    model.addAttribute("acc", companiesHandler.readCompany(companyid));
+    model.addAttribute("company", companiesHandler.readCompany(companyid));
     
     return "companies/companies_delete";
   }

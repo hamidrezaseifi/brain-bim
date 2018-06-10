@@ -98,7 +98,7 @@ public class CompanyModelUi {
   }
 
   public String getCreatedString() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.mm.yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     
     return created.format(formatter);
   }
